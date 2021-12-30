@@ -2,13 +2,14 @@
 
 #include "WinTypes.hpp"
 #include "WGLContext.hpp"
-#include "WindowEvent.hpp"
 
 #include <cstdint>
 #include <string>
 #include <functional>
 
 namespace sdf {
+
+	class WindowEvent;
 
 	class Window {
 
@@ -34,7 +35,9 @@ namespace sdf {
 		bool hasFocus() const;
 
 		void setKeyAutoRepeat(bool repeat) { keyAutoRepeat = repeat; }
-		void setEventCallback(const std::function<void(const Event&)> callback) { emitEvent = callback; }
+		void setEventCallback(const std::function<void(const WindowEvent&)> callback) { emitEvent = callback; }
+
+		void defaultEventCallback(const WindowEvent& e);
 
 		std::wstring getTitle() const { return title; }
 
@@ -54,15 +57,13 @@ namespace sdf {
 		void onMouseInteract(WPARAM wParam, LPARAM lParam);
 		void onKeyboardInteract(WPARAM wParam, LPARAM lParam);
 
-		void defaultEventCallback(const Event& e);
-
 	private:
 		std::wstring title;
 		int32_t x, y;
 		uint32_t width, height;
 
 		bool keyAutoRepeat;
-		std::function<void(const Event&)> emitEvent;
+		std::function<void(const WindowEvent&)> emitEvent;
 
 		HWND hWindow;
 		std::unique_ptr<WGLContext> wglContext;
@@ -70,3 +71,5 @@ namespace sdf {
 	};
 
 }
+
+#include "WindowEvent.hpp"

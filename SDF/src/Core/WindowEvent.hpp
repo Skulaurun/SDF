@@ -8,12 +8,16 @@ namespace sdf {
 	class WindowEvent : public Event {
 
 	public:
-		WindowEvent(const Window& window) : window(window) {}
+		WindowEvent(Window& window) : window(window) {}
 
-		const Window& getWindow() const { return window; }
+		Window& getWindow() const { return window; }
+
+		virtual const std::type_info& getType() const override { return typeid(WindowEvent); }
+
+		virtual void defaultDispatch() const override { window.defaultEventCallback(*this); }
 
 	private:
-		const Window& window;
+		Window& window;
 
 	};
 
@@ -22,7 +26,7 @@ namespace sdf {
 	public:
 		WindowCloseEvent(Window& window) : WindowEvent(window) {}
 
-		virtual EventType getType() const override { return EventType::WindowClose; }
+		virtual const std::type_info& getType() const override { return typeid(WindowCloseEvent); }
 
 	};
 
@@ -35,7 +39,7 @@ namespace sdf {
 		uint32_t getX() const { return x; }
 		uint32_t getY() const { return y; }
 
-		virtual EventType getType() const override { return EventType::WindowMove; }
+		virtual const std::type_info& getType() const override { return typeid(WindowMoveEvent); }
 
 	private:
 		uint32_t x, y;
@@ -51,7 +55,7 @@ namespace sdf {
 		uint32_t getWidth() const { return width; }
 		uint32_t getHeight() const { return height; }
 
-		virtual EventType getType() const override { return EventType::WindowResize; }
+		virtual const std::type_info& getType() const override { return typeid(WindowResizeEvent); }
 
 	private:
 		uint32_t width, height;

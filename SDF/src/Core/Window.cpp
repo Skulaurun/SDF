@@ -90,6 +90,10 @@ namespace sdf {
 			onSize(lParam);
 			return 0;
 
+		case WM_MOUSEMOVE:
+			onMouseInteract(wParam, lParam);
+			return 0;
+
 		case WM_LBUTTONDOWN:
 		case WM_RBUTTONDOWN:
 		case WM_MBUTTONDOWN:
@@ -139,14 +143,36 @@ namespace sdf {
 	}
 	void Window::onMouseInteract(WPARAM wParam, LPARAM lParam) {
 
-		bool isLeftButton = wParam & MK_LBUTTON;
-
-		//std::cout << isLeftButton << std::endl;
-
-		// TODO: Add support for Ctrl, Alt, etc.
+		// From MSDN: https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttondown#remarks
+		// To detect that the ALT key was pressed, check whether GetKeyState with VK_MENU < 0.
+		// Note, this must not be GetAsyncKeyState.
 
 		uint32_t posX = GET_X_LPARAM(lParam);
 		uint32_t posY = GET_Y_LPARAM(lParam);
+
+		if (wParam != 0) {
+
+			// emit buttonup or buttondown event
+
+			bool isAltDown = GetKeyState(VK_MENU) < 0;
+
+			//emitEvent(WindowMouseButtonEvent(
+			//	*this,
+			//	wParam & MK_CONTROL,
+			//	wParam & MK_SHIFT,
+			//	posX, posY,
+			//
+			//));
+
+		} else {
+			// emit mouse move event
+		}
+
+		//bool isLeftButton = wParam & MK_LBUTTON;
+
+		//std::cout << isLeftButton << std::endl;
+
+		// TODO: Add support for Ctrl, Shift, Alt, etc.
 		
 		//lastEvent.mouse.button = Input::getButton(wParam);
 
@@ -161,8 +187,14 @@ namespace sdf {
 
 		if (currentState == 0) {
 			if (previousState == 0 || keyAutoRepeat == true) {
+
 				// Event: Report key is down
 				//lastEvent = Event::KeyPressed;
+
+				//emitEvent(WindowKeyboardEvent(
+				//
+				//));
+
 			}
 		}
 		else {
@@ -175,8 +207,8 @@ namespace sdf {
 
 	}
 
-	void Window::defaultEventCallback(const Event& e) {
-		if (e.getType() == EventType::WindowClose) {
+	void Window::defaultEventCallback(const WindowEvent& e) {
+		if (e.is<WindowCloseEvent>()) {
 			close();
 		}
 	}

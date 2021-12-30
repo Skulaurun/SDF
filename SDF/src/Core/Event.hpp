@@ -1,28 +1,30 @@
 #pragma once
 
-#include "Input.hpp"
-
 #include <cstdint>
-#include <typeindex>
 #include <functional>
-#include <cassert>
 
 namespace sdf {
-
-	enum class EventType {
-		WindowClose, WindowMove, WindowResize
-	};
 
 	class Event {
 
 	public:
 		virtual ~Event() = default;
 
-		virtual EventType getType() const = 0;
+		virtual const std::type_info& getType() const = 0;
+
+		template<typename T> void dispatch(const std::function<void(const T&)>& callback) const {
+			static_assert(std::is_base_of<Event, T>::value);
+			if (this->is<T>()) {
+				callback(static_cast<const T&>(*this));
+			}
+		}
+
+		template<typename T> bool is() const {
+			return getType() == typeid(T);
+		}
+
+		virtual void defaultDispatch() const {}
 
 	};
-
-	// TODO: Add template<typename T, ...> void callIf(...)?
-	// TODO: Add get method for safe casting (runtime check)
 
 }
