@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="include\SDF\SDF.hpp" />
     <ClInclude Include="src\Core\Event.hpp" />
+    <ClInclude Include="src\Core\Input.hpp" />
     <ClInclude Include="src\Core\Time.hpp" />
     <ClInclude Include="src\Core\WGLContext.hpp" />
     <ClInclude Include="src\Core\Window.hpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="src\Core\WinTypes.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Core\Input.cpp" />
     <ClCompile Include="src\Core\Time.cpp" />
     <ClCompile Include="src\Core\WGLContext.cpp" />
     <ClCompile Include="src\Core\Window.cpp" />
