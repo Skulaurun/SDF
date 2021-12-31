@@ -6,8 +6,6 @@
 #include <windows.h>
 #include <windowsx.h>
 
-#include <iostream>
-
 namespace sdf {
 
     Window::Window(const std::wstring& title, const uint32_t width, const uint32_t height)
@@ -111,7 +109,6 @@ namespace sdf {
         case WM_KEYDOWN:
         case WM_SYSKEYDOWN:
             onKeyboardInteract(wParam, lParam);
-            std::cout << wParam << std::endl;
             return 0;
 
         case WM_KEYUP:
@@ -170,8 +167,6 @@ namespace sdf {
         }
 
         //bool isLeftButton = wParam & MK_LBUTTON;
-
-        //std::cout << isLeftButton << std::endl;
 
         // TODO: Add support for Ctrl, Shift, Alt, etc.
         
