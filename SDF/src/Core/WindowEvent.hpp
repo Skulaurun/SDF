@@ -33,16 +33,16 @@ namespace sdf {
     class WindowMoveEvent : public WindowEvent {
 
     public:
-        WindowMoveEvent(Window& window, const uint32_t x, const uint32_t y)
+        WindowMoveEvent(Window& window, const int32_t x, const int32_t y)
             : WindowEvent(window), x(x), y(y) {}
 
-        uint32_t getX() const { return x; }
-        uint32_t getY() const { return y; }
+        int32_t getX() const { return x; }
+        int32_t getY() const { return y; }
 
         virtual const std::type_info& getType() const override { return typeid(WindowMoveEvent); }
 
     private:
-        uint32_t x, y;
+        int32_t x, y;
 
     };
 
