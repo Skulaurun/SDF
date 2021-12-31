@@ -6,39 +6,39 @@
 
 namespace sdf {
 
-	Timer::Timer() {
-		reset();
-	}
+    Timer::Timer() {
+        reset();
+    }
 
-	void Timer::reset() {
+    void Timer::reset() {
 
-		LARGE_INTEGER largeInt;
-		QueryPerformanceFrequency(&largeInt);
+        LARGE_INTEGER largeInt;
+        QueryPerformanceFrequency(&largeInt);
 
-		frequency = largeInt.QuadPart;
-		QueryPerformanceCounter(&largeInt);
-		startTime = largeInt.QuadPart;
+        frequency = largeInt.QuadPart;
+        QueryPerformanceCounter(&largeInt);
+        startTime = largeInt.QuadPart;
 
-	}
+    }
 
-	LONGLONG Timer::getElapsedTime() {
+    LONGLONG Timer::getElapsedTime() {
 
-		LARGE_INTEGER largeInt;
-		QueryPerformanceCounter(&largeInt);
+        LARGE_INTEGER largeInt;
+        QueryPerformanceCounter(&largeInt);
 
-		LONGLONG elapsedTime = largeInt.QuadPart - startTime;
-		elapsedTime *= 1000000;
-		elapsedTime /= frequency;
+        LONGLONG elapsedTime = largeInt.QuadPart - startTime;
+        elapsedTime *= 1000000;
+        elapsedTime /= frequency;
 
-		return elapsedTime;
+        return elapsedTime;
 
-	}
+    }
 
-	double Timer::getElapsedMilliseconds() {
-		return (double)getElapsedTime() / 1000.0;
-	}
-	double Timer::getElapsedMicroseconds() {
-		return (double)getElapsedTime();
-	}
+    double Timer::getElapsedMilliseconds() {
+        return (double)getElapsedTime() / 1000.0;
+    }
+    double Timer::getElapsedMicroseconds() {
+        return (double)getElapsedTime();
+    }
 
 }

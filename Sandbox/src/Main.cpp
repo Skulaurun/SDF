@@ -33,6 +33,10 @@ int main() {
     // Make the window visible
     window.show();
 
+    if (sdf::Input::isKeyPressed(sdf::Input::Key::A)) {
+
+    }
+
     // Loop until the window is closed
     while (window.isOpen()) {
 

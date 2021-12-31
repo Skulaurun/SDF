@@ -4,22 +4,22 @@
 
 namespace sdf {
 
-	class Timer {
+    class Timer {
 
-	public:
-		Timer();
+    public:
+        Timer();
 
-		void reset();
-		double getElapsedMilliseconds();
-		double getElapsedMicroseconds();
+        void reset();
+        double getElapsedMilliseconds();
+        double getElapsedMicroseconds();
 
-	private:
-		LONGLONG getElapsedTime();
+    private:
+        LONGLONG getElapsedTime();
 
-	private:
-		LONGLONG frequency;
-		LONGLONG startTime;
+    private:
+        LONGLONG frequency;
+        LONGLONG startTime;
 
-	};
+    };
 
 }

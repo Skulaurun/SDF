@@ -4,26 +4,26 @@
 
 namespace sdf {
 
-	class Window;
+    class Window;
 
-	class WGLContext {
+    class WGLContext {
 
-	public:
-		WGLContext(const Window& window);
-		~WGLContext();
+    public:
+        WGLContext(const Window& window);
+        ~WGLContext();
 
-		bool makeCurrent() const;
-		bool swapBuffers() const;
+        bool makeCurrent() const;
+        bool swapBuffers() const;
 
-		static const WGLContext* getCurrentContext() { return currentContext; }
+        static const WGLContext* getCurrentContext() { return currentContext; }
 
-	private:
-		HWND hWindow;
-		HDC hDeviceContext;
-		HGLRC hGLContext;
+    private:
+        HWND hWindow;
+        HDC hDeviceContext;
+        HGLRC hGLContext;
 
-		static const WGLContext* currentContext;
+        static const WGLContext* currentContext;
 
-	};
+    };
 
 }

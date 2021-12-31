@@ -5,17 +5,17 @@ typedef struct HDC__* HDC;
 typedef struct HGLRC__* HGLRC;
 
 #if not defined(_WIN64)
-	typedef long LONG_PTR;
-	typedef unsigned int UINT_PTR;
+    typedef long LONG_PTR;
+    typedef unsigned int UINT_PTR;
 #else
-	typedef __int64 LONG_PTR;
-	typedef unsigned __int64 UINT_PTR;
+    typedef __int64 LONG_PTR;
+    typedef unsigned __int64 UINT_PTR;
 #endif
 
 #if not defined(_M_IX86)
-	typedef __int64 LONGLONG;
+    typedef __int64 LONGLONG;
 #else
-	typedef double LONGLONG;
+    typedef double LONGLONG;
 #endif
 
 typedef unsigned int UINT;

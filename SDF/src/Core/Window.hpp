@@ -9,66 +9,66 @@
 
 namespace sdf {
 
-	class WindowEvent;
+    class WindowEvent;
 
-	class Window {
+    class Window {
 
-	public:
-		Window(const std::wstring& title = L"Simple Dedicated Framework (SDF) Application", const uint32_t width = 800, const uint32_t height = 600);
-		~Window();
+    public:
+        Window(const std::wstring& title = L"Simple Dedicated Framework (SDF) Application", const uint32_t width = 800, const uint32_t height = 600);
+        ~Window();
 
-		bool makeContextCurrent(); // Call from Renderer::bindTarget(const Window& window)
+        bool makeContextCurrent(); // Call from Renderer::bindTarget(const Window& window)
 
-		void show();
-		void hide();
-		void focus();
-		void maximize();
-		void minimize();
-		void restore();
-		void close();
+        void show();
+        void hide();
+        void focus();
+        void maximize();
+        void minimize();
+        void restore();
+        void close();
 
-		void display();
-		void pollEvents();
+        void display();
+        void pollEvents();
 
-		bool isOpen() const;
-		bool isVisible() const;
-		bool hasFocus() const;
+        bool isOpen() const;
+        bool isVisible() const;
+        bool hasFocus() const;
 
-		void setKeyAutoRepeat(bool repeat) { keyAutoRepeat = repeat; }
-		void setEventCallback(const std::function<void(const WindowEvent&)> callback) { emitEvent = callback; }
+        void setKeyAutoRepeat(bool repeat) { keyAutoRepeat = repeat; }
+        void setEventCallback(const std::function<void(const WindowEvent&)> callback) { emitEvent = callback; }
 
-		void defaultEventCallback(const WindowEvent& e);
+        void defaultEventCallback(const WindowEvent& e);
 
-		std::wstring getTitle() const { return title; }
+        std::wstring getTitle() const { return title; }
 
-		int32_t getX() const { return x; }
-		int32_t getY() const { return y; }
-		uint32_t getWidth() const { return width; }
-		uint32_t getHeight() const { return height; }
+        int32_t getX() const { return x; }
+        int32_t getY() const { return y; }
+        uint32_t getWidth() const { return width; }
+        uint32_t getHeight() const { return height; }
 
-		HWND getNativeWindow() const { return hWindow; }
+        HWND getNativeWindow() const { return hWindow; }
 
-	private:
-		static LRESULT __stdcall _windowProcedure(HWND hWindow, UINT message, WPARAM wParam, LPARAM lParam);
-		LRESULT __stdcall windowProcedure(UINT message, WPARAM wParam, LPARAM lParam);
+    private:
+        static LRESULT __stdcall _windowProcedure(HWND hWindow, UINT message, WPARAM wParam, LPARAM lParam);
+        LRESULT __stdcall windowProcedure(UINT message, WPARAM wParam, LPARAM lParam);
 
-		void onMove(LPARAM lParam);
-		void onSize(LPARAM lParam);
-		void onMouseInteract(WPARAM wParam, LPARAM lParam);
-		void onKeyboardInteract(WPARAM wParam, LPARAM lParam);
+        void onMove(LPARAM lParam);
+        void onSize(LPARAM lParam);
+        void onMouseInteract(WPARAM wParam, LPARAM lParam);
+        void onKeyboardInteract(WPARAM wParam, LPARAM lParam);
 
-	private:
-		std::wstring title;
-		int32_t x, y;
-		uint32_t width, height;
+    private:
+        std::wstring title;
+        int32_t x, y;
+        uint32_t width, height;
 
-		bool keyAutoRepeat;
-		std::function<void(const WindowEvent&)> emitEvent;
+        bool keyAutoRepeat;
+        std::function<void(const WindowEvent&)> emitEvent;
 
-		HWND hWindow;
-		std::unique_ptr<WGLContext> wglContext;
+        HWND hWindow;
+        std::unique_ptr<WGLContext> wglContext;
 
-	};
+    };
 
 }
 
