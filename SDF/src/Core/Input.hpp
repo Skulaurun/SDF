@@ -23,17 +23,17 @@ namespace sdf {
             K, L, M, N, O, P, Q, R, S, T,
             U, V, W, X, Y, Z,
             
-            Semicolon,		/* ; */
-            Comma,			/* , */
-            Period,			/* . */
-            Quote,			/* ' */
-            Slash,			/* / */
-            Backslash,		/* \ */
-            Tilde,			/* ~ */
-            Equal,			/* = */
-            Hyphen,			/* - */
-            LeftBracket,	/* [ */
-            RightBracket,	/* ] */
+            Semicolon,      /* ; */
+            Comma,          /* , */
+            Period,         /* . */
+            Quote,          /* ' */
+            Slash,          /* / */
+            Backslash,      /* \ */
+            Tilde,          /* ~ */
+            Equal,          /* = */
+            Hyphen,         /* - */
+            LeftBracket,    /* [ */
+            RightBracket,   /* ] */
 
             LeftControl, LeftShift,  LeftAlt,  LeftSystem,
             RightControl, RightShift, RightAlt, RightSystem,
@@ -58,8 +58,8 @@ namespace sdf {
 
             /*
             * Missing keys:
-            *	Numpad Enter
-            *	Numpad Equal
+            *   Numpad Enter
+            *   Numpad Equal
             */
 
         };
