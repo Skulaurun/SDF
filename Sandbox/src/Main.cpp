@@ -23,7 +23,7 @@ void onWindowEvent(const sdf::WindowEvent& e) {
 }
 
 int main() {
-
+    
     // Create the window
     sdf::Window window(L"Sandbox App", 800, 600);
 
@@ -32,10 +32,6 @@ int main() {
 
     // Make the window visible
     window.show();
-
-    if (sdf::Input::isKeyPressed(sdf::Input::Key::A)) {
-
-    }
 
     // Loop until the window is closed
     while (window.isOpen()) {
