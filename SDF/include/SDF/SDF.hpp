@@ -1,5 +1,5 @@
 #pragma once
 
-#include "../../src/Core/Time.hpp"
-#include "../../src/Core/Input.hpp"
-#include "../../src/Core/Window.hpp"
+#include "Core/Time.hpp"
+#include "Core/Input.hpp"
+#include "Core/Window.hpp"

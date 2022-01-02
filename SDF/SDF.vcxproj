@@ -96,6 +96,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\Visual Studio GitHub Projects\SDF\SDF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,6 +113,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\Visual Studio GitHub Projects\SDF\SDF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,6 +132,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\Visual Studio GitHub Projects\SDF\SDF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +153,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\Visual Studio GitHub Projects\SDF\SDF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,13 +163,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\SDF\SDF.hpp" />
-    <ClInclude Include="src\Core\Event.hpp" />
-    <ClInclude Include="src\Core\Input.hpp" />
-    <ClInclude Include="src\Core\Time.hpp" />
+    <ClInclude Include="include\SDF\Core\Event.hpp" />
+    <ClInclude Include="include\SDF\Core\Input.hpp" />
+    <ClInclude Include="include\SDF\Core\Time.hpp" />
     <ClInclude Include="src\Core\WGLContext.hpp" />
-    <ClInclude Include="src\Core\Window.hpp" />
-    <ClInclude Include="src\Core\WindowEvent.hpp" />
-    <ClInclude Include="src\Core\WinTypes.hpp" />
+    <ClInclude Include="include\SDF\Core\Window.hpp" />
+    <ClInclude Include="include\SDF\Core\WindowEvent.hpp" />
+    <ClInclude Include="include\SDF\Core\WinTypes.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Input.cpp" />

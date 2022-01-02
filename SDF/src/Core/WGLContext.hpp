@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WinTypes.hpp"
+#include <SDF/Core/WinTypes.hpp>
 
 namespace sdf {
 

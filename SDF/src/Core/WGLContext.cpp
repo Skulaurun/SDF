@@ -1,5 +1,5 @@
+#include <SDF/Core/Window.hpp>
 #include "WGLContext.hpp"
-#include "Window.hpp"
 
 #include <windows.h>
 

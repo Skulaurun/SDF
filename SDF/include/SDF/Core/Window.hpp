@@ -1,7 +1,6 @@
 #pragma once
 
 #include "WinTypes.hpp"
-#include "WGLContext.hpp"
 
 #include <cstdint>
 #include <string>
@@ -9,6 +8,7 @@
 
 namespace sdf {
 
+    class WGLContext;
     class WindowEvent;
 
     class Window {

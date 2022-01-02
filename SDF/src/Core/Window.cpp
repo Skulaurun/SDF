@@ -1,6 +1,7 @@
-#include "Window.hpp"
+#include <SDF/Core/Window.hpp>
+#include <SDF/Core/Input.hpp>
 
-#include "Input.hpp"
+#include "WGLContext.hpp"
 
 #define UNICODE
 #include <windows.h>

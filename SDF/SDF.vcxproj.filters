@@ -15,28 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core\Window.hpp">
+    <ClInclude Include="include\SDF\Core\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\WinTypes.hpp">
+    <ClInclude Include="include\SDF\Core\WinTypes.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\SDF\SDF.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Time.hpp">
+    <ClInclude Include="include\SDF\Core\Time.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\WGLContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Event.hpp">
+    <ClInclude Include="include\SDF\Core\Event.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\WindowEvent.hpp">
+    <ClInclude Include="include\SDF\Core\WindowEvent.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Input.hpp">
+    <ClInclude Include="include\SDF\Core\Input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
