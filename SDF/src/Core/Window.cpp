@@ -178,34 +178,38 @@ namespace sdf {
     }
     void Window::onKeyboardInteract(WPARAM wParam, LPARAM lParam) {
 
-        // Check the "extended" flag to distinguish between left and right control
-        // Check the "extended" flag to distinguish between left and right alt
+        UINT scanCode = (lParam & 0x00ff0000) >> 16; // Access 16th - 23th bit
 
-        // TODO: Add support for Ctrl, Alt, etc.
+        bool isExtendedKey = (lParam >> 0x18) & 1; // Check 24th bit
+        int previousState = (lParam >> 0x1E) & 1; // Check 30th bit
+        int currentState = (lParam >> 0x1F) & 1; // Check 31th bit
 
-        // TODO: Look how it works on docs!
-        int previousState = (lParam >> 0x1E) & 1;
-        int currentState = (lParam >> 0x1F) & 1;
+        switch (wParam) {
+
+            case VK_MENU: wParam = isExtendedKey ? VK_RMENU : VK_LMENU; break;
+            case VK_CONTROL: wParam = isExtendedKey ? VK_RCONTROL : VK_LCONTROL; break;
+
+            case VK_SHIFT: wParam = MapVirtualKey(scanCode, MAPVK_VSC_TO_VK_EX); break;
+
+        }
+
+        Input::Key key = Input::toKey(wParam);
+        uint8_t mask = ((uint8_t)(GetKeyState(VK_CONTROL) < 0) << 0) |
+                       ((uint8_t)(GetKeyState(VK_SHIFT) < 0)   << 1) |
+                       ((uint8_t)(GetKeyState(VK_MENU) < 0)    << 2);
 
         if (currentState == 0) {
             if (previousState == 0 || keyAutoRepeat == true) {
-
-                // Event: Report key is down
-                //lastEvent = Event::KeyPressed;
-
-                //emitEvent(WindowKeyboardEvent(
-                //
-                //));
-
+                emitEvent(WindowKeyboardEvent(
+                    *this, mask | (1u << 3), key
+                ));
             }
         }
         else {
-            // Event: Report key is up
-            //lastEvent = Event::KeyReleased;
+            emitEvent(WindowKeyboardEvent(
+                *this, mask, key
+            ));
         }
-
-        // Event: Report the specific key that is either up or down
-        //lastEvent.keyboard.key = Input::getKey(wParam);
 
     }
 

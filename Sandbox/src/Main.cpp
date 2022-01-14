@@ -10,12 +10,32 @@ void onWindowMove(const sdf::WindowMoveEvent& e) {
     std::cout << "Window moved: (" << e.getX() << ", " << e.getY() << ")\n";
 }
 
+void onWindowKeyboardEvent(const sdf::WindowKeyboardEvent& e) {
+
+    // If the key that triggered this event is pressed
+    if (e.isKeyPressed()) {
+
+        // Shift, Ctrl and Alt are commonly combined with other keys
+        // that is when these quality of life functions come in handy
+        if (e.isShiftPressed() && e.getKey() == sdf::Input::Key::F) {
+            std::cout << "Key combination! (Shift + F)" << std::endl;
+        }
+
+        std::cout << ((int32_t)e.getKey()) << " key was pressed" << std::endl;
+
+    } else {
+        std::cout << ((int32_t)e.getKey()) << " key was released" << std::endl;
+    }
+
+}
+
 void onWindowEvent(const sdf::WindowEvent& e) {
 
     // Dispatch events we want to handle,
     // the dispatch method takes care of the event type checking
     e.dispatch<sdf::WindowMoveEvent>(onWindowMove);
     e.dispatch<sdf::WindowResizeEvent>(onWindowResize);
+    e.dispatch<sdf::WindowKeyboardEvent>(onWindowKeyboardEvent);
 
     // Invokes the default behavior for certain events
     e.defaultDispatch();
