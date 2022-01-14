@@ -1,6 +1,8 @@
 #include <SDF/Core/Window.hpp>
+#include <SDF/Core/Exception.hpp>
 #include <SDF/Core/Input.hpp>
 
+#include "WinError.hpp"
 #include "WGLContext.hpp"
 
 #define UNICODE
@@ -42,9 +44,9 @@ namespace sdf {
             NULL
         );
 
-        // Window creation failed (GetLastError)
         if (hWindow == NULL) {
-            // Error
+            WinError error = WinError::getLastError();
+            throw SystemException(error.message, error.code);
         }
 
         SetWindowLongPtr(hWindow, GWLP_USERDATA, (LONG_PTR)this);
