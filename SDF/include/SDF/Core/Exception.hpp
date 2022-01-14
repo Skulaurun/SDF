@@ -17,7 +17,7 @@ namespace sdf {
 
 	public:
 		explicit SystemException(const std::string& message, const uint64_t code) noexcept
-			: Exception(message.c_str()), code(code) {}
+			: Exception(message), code(code) {}
 
 		virtual uint64_t error() { return code; }
 
