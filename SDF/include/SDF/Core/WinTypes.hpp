@@ -19,6 +19,8 @@ typedef struct HGLRC__* HGLRC;
 #endif
 
 typedef unsigned int UINT;
+typedef unsigned long DWORD;
+
 typedef UINT_PTR WPARAM;
 typedef LONG_PTR LPARAM;
 typedef LONG_PTR LRESULT;

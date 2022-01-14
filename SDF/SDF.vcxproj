@@ -170,12 +170,14 @@
     <ClInclude Include="include\SDF\Core\Window.hpp" />
     <ClInclude Include="include\SDF\Core\WindowEvent.hpp" />
     <ClInclude Include="include\SDF\Core\WinTypes.hpp" />
+    <ClInclude Include="src\Core\WinError.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Input.cpp" />
     <ClCompile Include="src\Core\Time.cpp" />
     <ClCompile Include="src\Core\WGLContext.cpp" />
     <ClCompile Include="src\Core\Window.cpp" />
+    <ClCompile Include="src\Core\WinError.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
