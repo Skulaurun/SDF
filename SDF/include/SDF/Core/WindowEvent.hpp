@@ -68,7 +68,7 @@ namespace sdf {
     public:
         WindowInputEvent(
             Window& window,
-            uint8_t mask
+            const uint8_t mask
         ) :
             WindowEvent(window),
             ctrlPressed((mask >> 0) & 1u),
@@ -94,8 +94,8 @@ namespace sdf {
     public:
         WindowKeyboardEvent(
             Window& window,
-            uint8_t mask,
-            Input::Key key
+            const uint8_t mask,
+            const Input::Key key
         ) :
             WindowInputEvent(window, mask),
             keyPressed((mask >> 3) & 1u),
