@@ -163,6 +163,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\SDF\Core\Exception.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Math.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Matrix.hpp" />
+    <ClInclude Include="include\SDF\Core\Vector.hpp" />
     <ClInclude Include="include\SDF\SDF.hpp" />
     <ClInclude Include="include\SDF\Core\Event.hpp" />
     <ClInclude Include="include\SDF\Core\Input.hpp" />
