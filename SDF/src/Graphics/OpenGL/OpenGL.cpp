@@ -17,7 +17,7 @@ static void* getGLFunction(const char* name) {
 
 }
 
-namespace sdf::gl {
+namespace sdf {
 
 	GLClearPtr glClear = nullptr;
 	GLClearColorPtr glClearColor = nullptr;
@@ -53,7 +53,7 @@ namespace sdf::gl {
 	GLUniformMatrix3fvPtr glUniformMatrix3fv = nullptr;
 	GLUniformMatrix4fvPtr glUniformMatrix4fv = nullptr;
 
-	bool init() {
+	bool initGL() {
 
 		glLibrary = LoadLibrary("opengl32.dll");
 		if (glLibrary == NULL) {

@@ -2,7 +2,7 @@
 
 // OpenGL 3.0+ Loader for Windows
 
-namespace sdf::gl {
+namespace sdf {
 
 	enum {
 		GL_TRUE = 1,
@@ -110,6 +110,6 @@ namespace sdf::gl {
 	extern GLUniformMatrix3fvPtr glUniformMatrix3fv;
 	extern GLUniformMatrix4fvPtr glUniformMatrix4fv;
 
-	bool init(); // Rename?
+	bool initGL(); // Rename?
 
 }
