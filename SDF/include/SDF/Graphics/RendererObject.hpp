@@ -7,7 +7,6 @@ namespace sdf {
 	class RendererObject {
 
 	public:
-		RendererObject() = default;
 		virtual ~RendererObject() = default;
 
 		virtual void bind() const = 0;
