@@ -51,6 +51,9 @@ namespace sdf {
 	using GLBindBufferPtr = void (__stdcall*)(GLenum target, GLuint buffer);
 	using GLBufferDataPtr = void (__stdcall*)(GLenum target, GLsizeiptr size, const void* data, GLenum usage);
 	using GLBufferSubDataPtr = void (__stdcall*)(GLenum target, GLintptr offset, GLsizeiptr size, const void* data);
+	using GLGenVertexArraysPtr = void(__stdcall*)(GLsizei n, GLuint* arrays);
+	using GLDeleteVertexArraysPtr = void(__stdcall*)(GLsizei n, const GLuint* arrays);
+	using GLBindVertexArrayPtr = void(__stdcall*)(GLuint array);
 	using GLDrawElementsPtr = void (__stdcall*)(GLenum mode, GLsizei count, GLenum type, const void* indices);
 	using GLDrawArraysPtr = void (__stdcall*)(GLenum mode, GLint first, GLsizei count);
 	using GLVertexAttribPointerPtr = void (__stdcall*)(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer);
@@ -85,6 +88,9 @@ namespace sdf {
 	extern GLBindBufferPtr glBindBuffer;
 	extern GLBufferDataPtr glBufferData;
 	extern GLBufferSubDataPtr glBufferSubData;
+	extern GLGenVertexArraysPtr glGenVertexArrays;
+	extern GLDeleteVertexArraysPtr glDeleteVertexArrays;
+	extern GLBindVertexArrayPtr glBindVertexArray;
 	extern GLDrawElementsPtr glDrawElements;
 	extern GLDrawArraysPtr glDrawArrays;
 	extern GLVertexAttribPointerPtr glVertexAttribPointer;

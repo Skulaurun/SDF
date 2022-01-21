@@ -28,6 +28,9 @@ namespace sdf {
 	GLBindBufferPtr glBindBuffer = nullptr;
 	GLBufferDataPtr glBufferData = nullptr;
 	GLBufferSubDataPtr glBufferSubData = nullptr;
+	GLGenVertexArraysPtr glGenVertexArrays = nullptr;
+	GLDeleteVertexArraysPtr glDeleteVertexArrays = nullptr;
+	GLBindVertexArrayPtr glBindVertexArray = nullptr;
 	GLDrawElementsPtr glDrawElements = nullptr;
 	GLDrawArraysPtr glDrawArrays = nullptr;
 	GLVertexAttribPointerPtr glVertexAttribPointer = nullptr;
@@ -69,6 +72,9 @@ namespace sdf {
 		glBindBuffer = (GLBindBufferPtr)getGLFunction("glBindBuffer");
 		glBufferData = (GLBufferDataPtr)getGLFunction("glBufferData");
 		glBufferSubData = (GLBufferSubDataPtr)getGLFunction("glBufferSubData");
+		glGenVertexArrays = (GLGenVertexArraysPtr)getGLFunction("glGenVertexArrays");
+		glDeleteVertexArrays = (GLDeleteVertexArraysPtr)getGLFunction("glDeleteVertexArrays");
+		glBindVertexArray = (GLBindVertexArrayPtr)getGLFunction("glBindVertexArray");
 		glDrawElements = (GLDrawElementsPtr)getGLFunction("glDrawElements");
 		glDrawArrays = (GLDrawArraysPtr)getGLFunction("glDrawArrays");
 		glVertexAttribPointer = (GLVertexAttribPointerPtr)getGLFunction("glVertexAttribPointer");
