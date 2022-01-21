@@ -116,6 +116,6 @@ namespace sdf {
 	extern GLUniformMatrix3fvPtr glUniformMatrix3fv;
 	extern GLUniformMatrix4fvPtr glUniformMatrix4fv;
 
-	bool initGL(); // Rename?
+	bool initGL();
 
 }
