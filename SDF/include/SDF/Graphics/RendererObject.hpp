@@ -7,7 +7,9 @@ namespace sdf {
 	class RendererObject {
 
 	public:
-		RendererObject() = default;
+		RendererObject() : id(0) {}
+		RendererObject(uint32_t id) : id(id) {}
+
 		virtual ~RendererObject() = default;
 
 		virtual void bind() const = 0;
