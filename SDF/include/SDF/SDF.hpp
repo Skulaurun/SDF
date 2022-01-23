@@ -15,6 +15,8 @@
 #include "Graphics/Matrix.hpp"
 #include "Graphics/Math.hpp"
 
-//#include "Graphics/Renderer.hpp"
+#include "Graphics/OpenGL/Buffer.hpp"
+#include "Graphics/OpenGL/VertexBuffer.hpp"
+#include "Graphics/OpenGL/IndexBuffer.hpp"
 
 #include "Graphics/OpenGL/Shader.hpp"
