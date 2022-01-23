@@ -166,7 +166,11 @@
     <ClInclude Include="include\SDF\Graphics\Math.hpp" />
     <ClInclude Include="include\SDF\Graphics\Matrix.hpp" />
     <ClInclude Include="include\SDF\Core\Vector.hpp" />
+    <ClInclude Include="include\SDF\Graphics\OpenGL\Buffer.hpp" />
+    <ClInclude Include="include\SDF\Graphics\OpenGL\IndexBuffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\Shader.hpp" />
+    <ClInclude Include="include\SDF\Graphics\OpenGL\VertexArray.hpp" />
+    <ClInclude Include="include\SDF\Graphics\OpenGL\VertexBuffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\RendererObject.hpp" />
     <ClInclude Include="include\SDF\SDF.hpp" />
     <ClInclude Include="include\SDF\Core\Event.hpp" />
@@ -177,9 +181,11 @@
     <ClInclude Include="include\SDF\Core\WindowEvent.hpp" />
     <ClInclude Include="include\SDF\Core\WinTypes.hpp" />
     <ClInclude Include="src\Core\WinError.hpp" />
+    <ClInclude Include="src\Graphics\OpenGL\OpenGLEnum.hpp" />
     <ClInclude Include="src\Graphics\OpenGL\OpenGL.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\OpenGL\Buffer.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\Shader.cpp" />
     <ClCompile Include="src\Core\Input.cpp" />
     <ClCompile Include="src\Core\Time.cpp" />
@@ -187,6 +193,8 @@
     <ClCompile Include="src\Core\Window.cpp" />
     <ClCompile Include="src\Core\WinError.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\OpenGL.cpp" />
+    <ClCompile Include="src\Graphics\OpenGL\VertexArray.cpp" />
+    <ClCompile Include="src\Graphics\OpenGL\VertexBuffer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
