@@ -171,6 +171,7 @@
     <ClInclude Include="include\SDF\Graphics\OpenGL\Shader.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\VertexArray.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\VertexBuffer.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Renderer.hpp" />
     <ClInclude Include="include\SDF\Graphics\RendererObject.hpp" />
     <ClInclude Include="include\SDF\SDF.hpp" />
     <ClInclude Include="include\SDF\Core\Event.hpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="src\Graphics\OpenGL\OpenGL.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\VertexBuffer.cpp" />
+    <ClCompile Include="src\Graphics\Renderer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
