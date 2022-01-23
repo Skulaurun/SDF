@@ -8,6 +8,7 @@ namespace sdf {
     void VertexBuffer::setLayout(const std::vector<VertexBufferAttribute>& layout) {
 
         attributeLayout = layout;
+        attributeStride = 0;
 
         uint32_t offset = 0;
         for (auto& attribute : attributeLayout) {
