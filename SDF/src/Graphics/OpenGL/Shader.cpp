@@ -8,20 +8,15 @@
 
 #include "OpenGL.hpp"
 
-// TEMPORARY
 namespace sdf {
 
-	GLenum getEnum(const ShaderType& type) {
+	constexpr GLenum getEnum(const ShaderType& type) {
 		switch (type) {
 			case ShaderType::VertexShader: return GL_VERTEX_SHADER;
 			case ShaderType::FragmentShader: return GL_FRAGMENT_SHADER;
+			default: throw "UNSUPPORTED TYPE";
 		}
-		throw "UNSUPPORTED TYPE"; // TODO: Replace with assert
 	}
-
-}
-
-namespace sdf {
 
 	Shader::Shader(const std::vector<ShaderSource>& sources) {
 
