@@ -19,4 +19,6 @@
 #include "Graphics/OpenGL/VertexBuffer.hpp"
 #include "Graphics/OpenGL/IndexBuffer.hpp"
 
+#include "Graphics/OpenGL/VertexArray.hpp"
+
 #include "Graphics/OpenGL/Shader.hpp"
