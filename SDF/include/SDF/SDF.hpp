@@ -21,4 +21,6 @@
 
 #include "Graphics/OpenGL/VertexArray.hpp"
 
+#include "Graphics/Renderer.hpp"
+
 #include "Graphics/OpenGL/Shader.hpp"
