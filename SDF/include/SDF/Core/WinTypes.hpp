@@ -12,11 +12,7 @@ typedef struct HGLRC__* HGLRC;
     typedef unsigned __int64 UINT_PTR;
 #endif
 
-#if not defined(_M_IX86)
-    typedef __int64 LONGLONG;
-#else
-    typedef double LONGLONG;
-#endif
+typedef __int64 LONGLONG;
 
 typedef unsigned int UINT;
 typedef unsigned long DWORD;
