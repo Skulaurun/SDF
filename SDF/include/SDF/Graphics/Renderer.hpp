@@ -44,7 +44,6 @@ namespace sdf {
 		static const RendererStatistics getStatistics() { return statistics; }
 
 	private:
-		friend class RendererStatistics;
 		static RendererStatistics statistics;
 
 	};
