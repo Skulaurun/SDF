@@ -176,7 +176,7 @@
     <ClInclude Include="include\SDF\SDF.hpp" />
     <ClInclude Include="include\SDF\Core\Event.hpp" />
     <ClInclude Include="include\SDF\Core\Input.hpp" />
-    <ClInclude Include="include\SDF\Core\Time.hpp" />
+    <ClInclude Include="include\SDF\Core\Clock.hpp" />
     <ClInclude Include="src\Core\WGLContext.hpp" />
     <ClInclude Include="include\SDF\Core\Window.hpp" />
     <ClInclude Include="include\SDF\Core\WindowEvent.hpp" />
@@ -189,7 +189,7 @@
     <ClCompile Include="src\Graphics\OpenGL\Buffer.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\Shader.cpp" />
     <ClCompile Include="src\Core\Input.cpp" />
-    <ClCompile Include="src\Core\Time.cpp" />
+    <ClCompile Include="src\Core\Clock.cpp" />
     <ClCompile Include="src\Core\WGLContext.cpp" />
     <ClCompile Include="src\Core\Window.cpp" />
     <ClCompile Include="src\Core\WinError.cpp" />

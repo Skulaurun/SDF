@@ -24,7 +24,7 @@
     <ClInclude Include="include\SDF\SDF.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDF\Core\Time.hpp">
+    <ClInclude Include="include\SDF\Core\Clock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\WGLContext.hpp">
@@ -86,7 +86,7 @@
     <ClCompile Include="src\Core\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Time.cpp">
+    <ClCompile Include="src\Core\Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\WGLContext.cpp">
