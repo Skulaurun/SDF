@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../Core/Vector.hpp"
 #include "Matrix.hpp"
 
-namespace sdf::math {
+#include <cmath>
+
+namespace sdf {
 
     template<typename T>
     Matrix4x4<T> translate(const Vector3D<T>& v) {
@@ -26,8 +27,13 @@ namespace sdf::math {
     }
 
     template<typename T>
-    Matrix4x4<T> rotate(const T angle, const Vector3D<T>& v) {
-
+    Matrix4x4<T> rotate(const T a, const Vector3D<T>& r) {
+        return Matrix4x4<T>(
+            std::cos(a) + std::pow(r.x, 2) * (1 - std::cos(a)), r.y * r.x * (1 - std::cos(a)) + r.z * std::sin(a), r.z * r.x * (1 - std::cos(a)) - r.y * std::sin(a), 0,
+            r.x * r.y * (1 - std::cos(a)) - r.z * std::sin(a), std::cos(a) + std::pow(r.y, 2) * (1 - std::cos(a)), r.z * r.y * (1 - std::cos(a)) + r.x * std::sin(a), 0,
+            r.x * r.z * (1 - std::cos(a)) + r.y * std::sin(a), r.y * r.z * (1 - std::cos(a)) - r.x * std::sin(a), std::cos(a) + std::pow(r.z, 2) * (1 - std::cos(a)), 0,
+            0, 0, 0, 1
+        );
     }
 
     template<typename T>
@@ -41,8 +47,8 @@ namespace sdf::math {
     }
 
     template<typename T>
-    Matrix4x4<T> rotate(const Matrix4x4<T>& m) {
-
+    Matrix4x4<T> rotate(const Matrix4x4<T>& m, const T angle, const Vector3D<T>& axis) {
+        return m * rotate(angle, axis);
     }
 
     template<typename T>
