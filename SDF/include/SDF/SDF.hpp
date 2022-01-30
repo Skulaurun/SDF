@@ -6,7 +6,7 @@
 
 #include "Core/Vector.hpp"
 
-#include "Core/Time.hpp"
+#include "Core/Clock.hpp"
 #include "Core/Input.hpp"
 #include "Core/Window.hpp"
 
