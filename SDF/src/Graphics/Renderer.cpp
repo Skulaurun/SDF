@@ -127,10 +127,10 @@ namespace sdf {
     template<typename T>
     Vector4D<T> operator*(const Matrix4x4<T>& matrix, const Vector4D<T> vector) {
         return Vector4D<T>(
-            matrix[0][0] * vector.x + matrix[3][0],
-            matrix[1][1] * vector.y + matrix[3][1],
-            matrix[2][2] * vector.z + matrix[3][2],
-            matrix[3][3] * vector.w + matrix[3][3]
+            matrix[0][0] * vector.x + matrix[1][0] * vector.y + matrix[2][0] * vector.z + matrix[3][0] * vector.w,
+            matrix[0][1] * vector.x + matrix[1][1] * vector.y + matrix[2][1] * vector.z + matrix[3][1] * vector.w,
+            matrix[0][2] * vector.x + matrix[1][2] * vector.y + matrix[2][2] * vector.z + matrix[3][2] * vector.w,
+            matrix[0][3] * vector.x + matrix[1][3] * vector.y + matrix[2][3] * vector.z + matrix[3][3] * vector.w
         );
     }
     
