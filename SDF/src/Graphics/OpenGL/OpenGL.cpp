@@ -9,7 +9,7 @@
 static HMODULE glLibrary;
 
 static void* getGLFunction(const char* name) {
-    
+
     void* ptr = (void*)wglGetProcAddress(name);
     if (ptr == 0) {
         ptr = (void*)GetProcAddress(glLibrary, name);
@@ -37,6 +37,12 @@ namespace sdf {
     GLDrawArraysPtr                 glDrawArrays                = nullptr;
     GLVertexAttribPointerPtr        glVertexAttribPointer       = nullptr;
     GLEnableVertexAttribArrayPtr    glEnableVertexAttribArray   = nullptr;
+    GLGenTexturesPtr                glGenTextures               = nullptr;
+    GLDeleteTexturesPtr             glDeleteTextures            = nullptr;
+    GLActiveTexturePtr              glActiveTexture             = nullptr;
+    GLBindTexturePtr                glBindTexture               = nullptr;
+    GLTexParameteriPtr              glTexParameteri             = nullptr;
+    GLTexImage2DPtr                 glTexImage2D                = nullptr;
     GLCreateProgramPtr              glCreateProgram             = nullptr;
     GLDeleteProgramPtr              glDeleteProgram             = nullptr;
     GLLinkProgramPtr                glLinkProgram               = nullptr;
@@ -81,6 +87,12 @@ namespace sdf {
         LOAD_GL_FUNCTION(GLDrawArraysPtr, glDrawArrays);
         LOAD_GL_FUNCTION(GLVertexAttribPointerPtr, glVertexAttribPointer);
         LOAD_GL_FUNCTION(GLEnableVertexAttribArrayPtr, glEnableVertexAttribArray);
+        LOAD_GL_FUNCTION(GLGenTexturesPtr, glGenTextures);
+        LOAD_GL_FUNCTION(GLDeleteTexturesPtr, glDeleteTextures);
+        LOAD_GL_FUNCTION(GLActiveTexturePtr, glActiveTexture);
+        LOAD_GL_FUNCTION(GLBindTexturePtr, glBindTexture);
+        LOAD_GL_FUNCTION(GLTexParameteriPtr, glTexParameteri);
+        LOAD_GL_FUNCTION(GLTexImage2DPtr, glTexImage2D);
         LOAD_GL_FUNCTION(GLCreateProgramPtr, glCreateProgram);
         LOAD_GL_FUNCTION(GLDeleteProgramPtr, glDeleteProgram);
         LOAD_GL_FUNCTION(GLLinkProgramPtr, glLinkProgram);
