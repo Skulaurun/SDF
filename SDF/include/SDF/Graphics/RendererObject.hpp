@@ -15,6 +15,8 @@ namespace sdf {
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 
+		bool operator==(const RendererObject& other) { return id == other.id; }
+
 	protected:
 		uint32_t id;
 
