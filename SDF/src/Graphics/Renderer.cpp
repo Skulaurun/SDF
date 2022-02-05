@@ -118,6 +118,8 @@ namespace sdf {
 
         delete[] indices;
 
+        return true;
+
     }
     
     void Renderer::clear(const Vec4f& color) {
