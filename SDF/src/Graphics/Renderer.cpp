@@ -59,7 +59,7 @@ namespace sdf {
 
     bool Renderer::init() {
 
-        if (!initGL()) {
+        if (!loadGLFunctions()) {
             //std::cerr << "Failed to initialize OpenGL!" << std::endl;
             return false;
         }
@@ -76,6 +76,7 @@ namespace sdf {
 
         shader->bind();
 
+        // TODO: Put this in OrthographicCamera class and pass it as a parameter
         sdf::Mat4f projection = sdf::ortho(0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f);
         shader->setUniform("uProjection", projection);
 
