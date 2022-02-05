@@ -147,7 +147,7 @@ namespace sdf {
         // From MSDN: https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttondown#remarks
         // To detect that the ALT key was pressed, check whether GetKeyState with VK_MENU < 0.
         // Note, this must not be GetAsyncKeyState.
-
+        
         uint32_t posX = GET_X_LPARAM(lParam);
         uint32_t posY = GET_Y_LPARAM(lParam);
 
@@ -217,6 +217,10 @@ namespace sdf {
         if (e.is<WindowCloseEvent>()) {
             close();
         }
+    }
+
+    void Window::setTitle(const std::wstring& title) {
+        SetWindowText(hWindow, title.c_str());
     }
 
     bool Window::makeContextCurrent() {

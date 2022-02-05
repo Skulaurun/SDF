@@ -37,6 +37,8 @@ namespace sdf {
         void setKeyAutoRepeat(bool repeat) { keyAutoRepeat = repeat; }
         void setEventCallback(const std::function<void(const WindowEvent&)> callback) { emitEvent = callback; }
 
+        void setTitle(const std::wstring& title);
+
         void defaultEventCallback(const WindowEvent& e);
 
         std::wstring getTitle() const { return title; }
