@@ -84,7 +84,7 @@ namespace sdf {
 
         hResult = decoderFrame->GetSize((UINT*)&width, (UINT*)&height);
 
-        WICRect rect = { 0, 0, width, height };
+        WICRect rect = { 0, 0, (INT)width, (INT)height };
 
         WICPixelFormatGUID pixelFormatGUID;
         hResult = decoderFrame->GetPixelFormat(&pixelFormatGUID);
