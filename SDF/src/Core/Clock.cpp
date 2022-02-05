@@ -15,7 +15,7 @@ namespace sdf {
     double Clock::getFrequency() {
         LARGE_INTEGER largeInt;
         QueryPerformanceFrequency(&largeInt);
-        return largeInt.QuadPart;
+        return (double)largeInt.QuadPart;
     }
 
     double Clock::getTime() {
@@ -25,7 +25,7 @@ namespace sdf {
         LARGE_INTEGER largeInt;
         QueryPerformanceCounter(&largeInt);
 
-        return largeInt.QuadPart / (double)frequency;
+        return largeInt.QuadPart / frequency;
 
     }
 
