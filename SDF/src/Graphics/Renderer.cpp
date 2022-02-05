@@ -169,13 +169,13 @@ namespace sdf {
     void Renderer::flush() {
     
         Vertex* dataPtr = vertices.get();
-        uint32_t dataSize = (uint32_t)vertexPtr - (uint32_t)dataPtr;
+        uintptr_t dataSize = (uintptr_t)vertexPtr - (uintptr_t)dataPtr;
 
         vertexArray->bind();
         indexBuffer->bind();
 
         vertexBuffer->bind();
-        vertexBuffer->update((float*)dataPtr, 0, dataSize);
+        vertexBuffer->update((float*)dataPtr, 0, (uint32_t)dataSize);
 
         shader->bind();
 
