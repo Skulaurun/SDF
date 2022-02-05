@@ -12,29 +12,25 @@ namespace sdf {
         startTime = getTime();
     }
 
-    LONGLONG Clock::getFrequency() {
+    double Clock::getFrequency() {
         LARGE_INTEGER largeInt;
         QueryPerformanceFrequency(&largeInt);
         return largeInt.QuadPart;
     }
 
-    LONGLONG Clock::getTime() {
+    double Clock::getTime() {
 
-        static LONGLONG frequency = getFrequency();
+        static double frequency = getFrequency();
 
         LARGE_INTEGER largeInt;
         QueryPerformanceCounter(&largeInt);
 
-        LONGLONG time = largeInt.QuadPart;
-        time *= 1000000;
-        time /= frequency;
-
-        return time;
+        return largeInt.QuadPart / (double)frequency;
 
     }
 
     ClockUnit Clock::getElapsed() const {
-        return ClockUnit((double)(getTime() - startTime));
+        return ClockUnit(getTime() - startTime);
     }
 
 }

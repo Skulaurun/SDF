@@ -9,9 +9,9 @@ namespace sdf {
         ClockUnit(const double time)
             : time(time) {}
 
-        double asSeconds() const { return time / 100000; }
-        double asMilliseconds() const { return time / 1000; }
-        double asMicroseconds() const { return time; }
+        double asSeconds() const { return time; }
+        double asMilliseconds() const { return time * 1000; }
+        double asMicroseconds() const { return time * 100000; }
 
         operator double() { return asMicroseconds(); }
 
@@ -29,14 +29,14 @@ namespace sdf {
         void restart();
         ClockUnit getElapsed() const;
 
-        static ClockUnit getNow() { return ClockUnit((double)getTime()); }
+        static ClockUnit getNow() { return ClockUnit(getTime()); }
 
     private:
-        static LONGLONG getTime();
-        static LONGLONG getFrequency();
+        static double getTime();
+        static double getFrequency();
 
     private:
-        LONGLONG startTime;
+        double startTime;
 
     };
 
