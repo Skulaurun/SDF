@@ -188,7 +188,7 @@ namespace sdf {
     
     }
 
-    void Renderer::setViewport(const Vec2f& position, const Vec2f& size) {
+    void Renderer::setViewport(const Vec2i& position, const Vec2u& size) {
         glViewport(position.x, position.y, size.x, size.y);
     }
 

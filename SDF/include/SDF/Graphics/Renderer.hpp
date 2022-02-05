@@ -38,7 +38,7 @@ namespace sdf {
 		static void drawQuad(const Mat4f& transform, const Vec4f& color);
 		static void flush();
 
-		static void setViewport(const Vec2f& position, const Vec2f& size);
+		static void setViewport(const Vec2i& position, const Vec2u& size);
 
 		static const void resetStatistics() { statistics = { 0, 0 }; }
 		static const RendererStatistics getStatistics() { return statistics; }
