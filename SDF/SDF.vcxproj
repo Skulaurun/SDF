@@ -163,12 +163,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\SDF\Core\Exception.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Image.hpp" />
     <ClInclude Include="include\SDF\Graphics\Math.hpp" />
     <ClInclude Include="include\SDF\Graphics\Matrix.hpp" />
     <ClInclude Include="include\SDF\Core\Vector.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\Buffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\IndexBuffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\Shader.hpp" />
+    <ClInclude Include="include\SDF\Graphics\OpenGL\Texture.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\VertexArray.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\VertexBuffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\Renderer.hpp" />
@@ -186,6 +188,7 @@
     <ClInclude Include="src\Graphics\OpenGL\OpenGL.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\Image.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\Buffer.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\Shader.cpp" />
     <ClCompile Include="src\Core\Input.cpp" />
@@ -194,6 +197,7 @@
     <ClCompile Include="src\Core\Window.cpp" />
     <ClCompile Include="src\Core\WinError.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\OpenGL.cpp" />
+    <ClCompile Include="src\Graphics\OpenGL\Texture.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
