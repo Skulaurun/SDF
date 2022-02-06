@@ -5,6 +5,8 @@
 
 namespace sdf {
 
+    using SDFVertexAttribPointer = void (__stdcall*)(GLuint, GLint, GLenum, GLboolean, GLsizei, uintptr_t);
+
     void VertexBuffer::setLayout(const std::vector<VertexBufferAttribute>& layout) {
 
         attributeLayout = layout;
@@ -29,15 +31,15 @@ namespace sdf {
 
         for (const auto& attribute : attributeLayout) {
 
-            glVertexAttribPointer(
+            ((SDFVertexAttribPointer)glVertexAttribPointer)(
                 attributeOffset,
                 attribute.count,
                 TO_NATIVE_ENUM(attribute.type),
                 attribute.normalized ? GL_TRUE : GL_FALSE,
                 attributeStride,
-                (const void*)attribute.offset
+                attribute.offset
             );
-
+            
             glEnableVertexAttribArray(attributeOffset++);
 
         }
