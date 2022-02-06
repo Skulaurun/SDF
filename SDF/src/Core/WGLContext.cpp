@@ -1,7 +1,8 @@
-#include <SDF/Core/Window.hpp>
-#include "WGLContext.hpp"
+#include <PCH.hpp>
 
-#include <windows.h>
+#include <SDF/Core/Window.hpp>
+
+#include "WGLContext.hpp"
 
 #pragma comment (lib, "opengl32.lib")
 

@@ -1,3 +1,5 @@
+#include <PCH.hpp>
+
 #include <SDF/Graphics/Renderer.hpp>
 
 #include <SDF/Graphics/Math.hpp>
@@ -9,8 +11,6 @@
 #include <SDF/Graphics/OpenGL/Shader.hpp>
 
 #include "OpenGL/OpenGL.hpp"
-
-#include <memory>
 
 constexpr static uint32_t MAX_QUAD_COUNT = 10000;
 constexpr static uint32_t MAX_TEXTURE_COUNT = 32;

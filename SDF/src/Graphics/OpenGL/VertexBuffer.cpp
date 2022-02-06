@@ -1,3 +1,5 @@
+#include <PCH.hpp>
+
 #include <SDF/Graphics/OpenGL/VertexBuffer.hpp>
 
 #include "OpenGL.hpp"

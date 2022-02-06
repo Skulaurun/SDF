@@ -1,3 +1,5 @@
+#include <PCH.hpp>
+
 #include <SDF/Graphics/OpenGL/VertexArray.hpp>
 
 #include "OpenGL.hpp"

@@ -1,13 +1,11 @@
+#include <PCH.hpp>
+
 #include <SDF/Core/Window.hpp>
 #include <SDF/Core/Exception.hpp>
 #include <SDF/Core/Input.hpp>
 
 #include "WinError.hpp"
 #include "WGLContext.hpp"
-
-#define UNICODE
-#include <windows.h>
-#include <windowsx.h>
 
 namespace sdf {
 

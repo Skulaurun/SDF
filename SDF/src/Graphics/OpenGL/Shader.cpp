@@ -1,7 +1,6 @@
-#include <SDF/Graphics/OpenGL/Shader.hpp>
+#include <PCH.hpp>
 
-#include <sstream>
-#include <fstream>
+#include <SDF/Graphics/OpenGL/Shader.hpp>
 
 // temp
 #include <iostream>

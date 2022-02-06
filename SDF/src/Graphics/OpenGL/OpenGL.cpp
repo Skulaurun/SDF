@@ -1,6 +1,6 @@
-#include "OpenGL.hpp"
+#include <PCH.hpp>
 
-#include <windows.h>
+#include "OpenGL.hpp"
 
 #pragma comment (lib, "opengl32.lib")
 
@@ -66,7 +66,7 @@ namespace sdf {
 
     bool loadGLFunctions() {
 
-        glLibrary = LoadLibrary("opengl32.dll");
+        glLibrary = LoadLibraryA("opengl32.dll");
         if (glLibrary == NULL) {
             return false;
         }

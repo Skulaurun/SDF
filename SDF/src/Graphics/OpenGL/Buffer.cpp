@@ -1,3 +1,5 @@
+#include <PCH.hpp>
+
 #include <SDF/Graphics/OpenGL/Buffer.hpp>
 
 #include "OpenGL.hpp"

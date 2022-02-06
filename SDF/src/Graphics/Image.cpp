@@ -1,8 +1,6 @@
-#include "SDF/Graphics/Image.hpp"
+#include <PCH.hpp>
 
-#include <windows.h>
-#include <wincodec.h>
-#include <comdef.h> // This is for _com_error
+#include "SDF/Graphics/Image.hpp"
 
 namespace sdf {
 
@@ -63,7 +61,7 @@ namespace sdf {
 
     }
 
-    // TODO: Check HRESULTs and throw exceptions
+    // TODO: Check HRESULTs and throw exceptions (comdef.h?)
     void Image::decodeImage(IWICStream* stream) {
 
         HRESULT hResult = S_OK;

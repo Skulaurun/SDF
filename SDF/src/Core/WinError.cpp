@@ -1,9 +1,8 @@
+#include <PCH.hpp>
+
 #include "WinError.hpp"
 
-#include <memory>
 #include <system_error>
-
-#include <windows.h>
 
 namespace sdf {
 
@@ -16,15 +15,15 @@ namespace sdf {
 
         // TODO: Fix language, guarantee English
 
-        LPTSTR buffer = {};
-        DWORD size = FormatMessage(
+        LPSTR buffer = {};
+        DWORD size = FormatMessageA(
             FORMAT_MESSAGE_FROM_SYSTEM |
             FORMAT_MESSAGE_ALLOCATE_BUFFER |
             FORMAT_MESSAGE_IGNORE_INSERTS,
             NULL,
             error,
             0,
-            (LPTSTR)&buffer,
+            (LPSTR)&buffer,
             0,
             NULL
         );
