@@ -25,3 +25,10 @@
 #include "Graphics/OpenGL/Texture.hpp"
 
 #include "Graphics/Renderer.hpp"
+
+/* Network Module */
+
+#include "Network/Network.hpp"
+
+#include "Network/AddressInfo.hpp"
+#include "Network/Socket.hpp"

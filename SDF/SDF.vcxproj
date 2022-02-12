@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -171,6 +171,9 @@
     <ClInclude Include="include\SDF\Graphics\OpenGL\VertexBuffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\Renderer.hpp" />
     <ClInclude Include="include\SDF\Graphics\RendererObject.hpp" />
+    <ClInclude Include="include\SDF\Network\AddressInfo.hpp" />
+    <ClInclude Include="include\SDF\Network\Network.hpp" />
+    <ClInclude Include="include\SDF\Network\Socket.hpp" />
     <ClInclude Include="include\SDF\SDF.hpp" />
     <ClInclude Include="include\SDF\Core\Event.hpp" />
     <ClInclude Include="include\SDF\Core\Input.hpp" />
@@ -198,6 +201,9 @@
     <ClCompile Include="src\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Network\AddressInfo.cpp" />
+    <ClCompile Include="src\Network\Network.cpp" />
+    <ClCompile Include="src\Network\Socket.cpp" />
     <ClCompile Include="src\PCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
