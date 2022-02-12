@@ -10,44 +10,44 @@ typedef struct sockaddr sockaddr;
 
 namespace sdf {
 
-	enum class NetworkProtocol {
-		TCP, UDP
-	};
+    enum class NetworkProtocol {
+        TCP, UDP
+    };
 
-	struct Endpoint {
+    struct Endpoint {
 
-		uint16_t port;
-		std::string address;
+        uint16_t port;
+        std::string address;
 
-		friend std::ostream& operator<<(std::ostream& o, const Endpoint& endpoint);
+        friend std::ostream& operator<<(std::ostream& o, const Endpoint& endpoint);
 
-	};
+    };
 
-	class Socket {
+    class Socket {
 
-	public:
-		Socket(const NetworkProtocol protocol);
-		Socket(const SOCKET socket);
-		virtual ~Socket();
-		
-		void bind(const uint16_t port);
-		void bind(const sdf::AddressInfo& info);
+    public:
+        Socket(const NetworkProtocol protocol);
+        Socket(const SOCKET socket);
+        virtual ~Socket();
+        
+        void bind(const uint16_t port);
+        void bind(const sdf::AddressInfo& info);
 
-		void connect(const sdf::AddressInfo& info);
-		void listen();
+        void connect(const sdf::AddressInfo& info);
+        void listen();
 
-		Endpoint getLocalEndpoint() const;
-		Endpoint getRemoteEndpoint() const;
+        Endpoint getLocalEndpoint() const;
+        Endpoint getRemoteEndpoint() const;
 
-		std::tuple<std::shared_ptr<Socket>, Endpoint> accept() const;
+        std::tuple<std::shared_ptr<Socket>, Endpoint> accept() const;
 
-	private:
-		void bind(sockaddr* address, int32_t length) const;
-		Endpoint getNameInfo(sockaddr* info, int32_t length) const;
+    private:
+        void bind(sockaddr* address, int32_t length) const;
+        Endpoint getNameInfo(sockaddr* info, int32_t length) const;
 
-	private:
-		SOCKET socket;
+    private:
+        SOCKET socket;
 
-	};
+    };
 
 }
