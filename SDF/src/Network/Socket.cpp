@@ -32,7 +32,7 @@ namespace sdf {
     }
 
     Socket::~Socket() {
-        ::closesocket(socket);
+        close();
     }
 
     void Socket::bind(const uint16_t port) {
@@ -103,6 +103,10 @@ namespace sdf {
 
         return true;
 
+    }
+
+    void Socket::close() {
+        ::closesocket(socket);
     }
 
     Endpoint Socket::getLocalEndpoint() const {

@@ -39,6 +39,8 @@ namespace sdf {
         void send(const char* buffer, const std::size_t length) const;
         bool receive(char* buffer, const std::size_t length) const;
 
+        void close();
+
         Endpoint getLocalEndpoint() const;
         Endpoint getRemoteEndpoint() const;
 
