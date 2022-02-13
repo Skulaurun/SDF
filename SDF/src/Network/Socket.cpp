@@ -83,6 +83,28 @@ namespace sdf {
 
     }
 
+    void Socket::send(const char* buffer, const std::size_t length) const {
+
+        if (::send(socket, buffer, length, 0) == SOCKET_ERROR) {
+            // error
+        }
+
+    }
+
+    bool Socket::receive(char* buffer, const std::size_t length) const {
+
+        int32_t result = ::recv(socket, buffer, length, 0);
+        if (result == 0) {
+            return false;
+        } else if (result < 0) {
+            // error (throw an exception)
+            return false;
+        }
+
+        return true;
+
+    }
+
     Endpoint Socket::getLocalEndpoint() const {
 
         sockaddr_storage storage = {};
