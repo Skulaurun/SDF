@@ -51,7 +51,8 @@ namespace sdf {
     static uint32_t textureIndex = 0;
     //static UPtr<SPtr<Texture>[]> textures = nullptr;
 
-    static std::unique_ptr<Shader> shader = nullptr;
+    std::stack<std::shared_ptr<Shader>> Renderer::shaders = {};
+    std::stack<std::shared_ptr<Camera2D>> Renderer::cameras = {};
     
     static std::unique_ptr<VertexArray> vertexArray = nullptr;
     static std::shared_ptr<VertexBuffer> vertexBuffer = nullptr;
@@ -69,16 +70,18 @@ namespace sdf {
             return false;
         }
 
-        shader = std::make_unique<Shader>(std::vector<ShaderSource>{
+        std::shared_ptr<Shader> shader = std::make_shared<Shader>(std::vector<ShaderSource>{
             { ShaderType::VertexShader, DEFAULT_VERTEX_SHADER },
             { ShaderType::FragmentShader, DEFAULT_FRAGMENT_SHADER }
         });
 
+        shaders.push(shader);
         shader->bind();
 
-        // TODO: Put this in OrthographicCamera class and pass it as a parameter
-        sdf::Mat4f projection = sdf::ortho(0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f);
-        shader->setUniform("uProjection", projection);
+        // Not ideal solution
+        std::shared_ptr<Camera2D> camera = std::make_shared<Camera2D>(0.0f, 1.0f, 1.0f, 0.0f);
+        camera->setProjectionMatrix(Mat4f(1.0f));
+        cameras.push(camera);
 
         vertices = std::make_unique<Vertex[]>(MAX_VERTEX_COUNT);
         //textures = UPtr<SPtr<Texture>[]>::create(MAX_TEXTURE_COUNT);
@@ -179,7 +182,11 @@ namespace sdf {
         vertexBuffer->bind();
         vertexBuffer->update((float*)dataPtr, 0, (uint32_t)dataSize);
 
+        auto& shader = shaders.top();
         shader->bind();
+
+        auto& camera = cameras.top();
+        shader->setUniform("uProjection", camera->getProjectionMatrix());
 
         glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, (const void*)0);
 
@@ -188,6 +195,22 @@ namespace sdf {
         vertexPtr = vertices.get();
         indexCount = 0;
     
+    }
+
+    void Renderer::beginShader(const std::shared_ptr<Shader>& shader) {
+        shaders.push(shader);
+    }
+
+    void Renderer::endShader() {
+        shaders.pop();
+    }
+
+    void Renderer::beginCamera(const std::shared_ptr<Camera2D>& camera) {
+        cameras.push(camera);
+    }
+
+    void Renderer::endCamera() {
+        cameras.pop();
     }
 
     void Renderer::setViewport(const Vec2i& position, const Vec2u& size) {

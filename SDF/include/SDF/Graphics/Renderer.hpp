@@ -1,9 +1,12 @@
 #pragma once
 
 #include "../Core/Vector.hpp"
+#include "OpenGL/Shader.hpp"
+#include "Camera2D.hpp"
 #include "Matrix.hpp"
 
 #include <cstdint>
+#include <stack>
 
 namespace sdf {
 
@@ -38,12 +41,21 @@ namespace sdf {
 		static void drawQuad(const Mat4f& transform, const Vec4f& color);
 		static void flush();
 
+		static void beginShader(const std::shared_ptr<Shader>& shader);
+		static void endShader();
+
+		static void beginCamera(const std::shared_ptr<Camera2D>& camera);
+		static void endCamera();
+
 		static void setViewport(const Vec2i& position, const Vec2u& size);
 
 		static const void resetStatistics() { statistics = { 0, 0 }; }
 		static const RendererStatistics getStatistics() { return statistics; }
 
 	private:
+		static std::stack<std::shared_ptr<Shader>> shaders;
+		static std::stack<std::shared_ptr<Camera2D>> cameras;
+		
 		static RendererStatistics statistics;
 
 	};
