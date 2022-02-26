@@ -24,6 +24,7 @@
 #include "Graphics/OpenGL/Shader.hpp"
 #include "Graphics/OpenGL/Texture.hpp"
 
+#include "Graphics/Camera2D.hpp"
 #include "Graphics/Renderer.hpp"
 
 /* Network Module */
