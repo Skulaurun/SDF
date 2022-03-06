@@ -5,6 +5,8 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <array>
+#include <stack>
 #include <tuple>
 #include <unordered_map>
 
