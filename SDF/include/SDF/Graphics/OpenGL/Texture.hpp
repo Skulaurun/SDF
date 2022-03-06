@@ -48,12 +48,18 @@ namespace sdf {
 	class Texture : public RendererObject {
 
 	public:
-		// TODO: Add support for already decoded pixel data
+		Texture(const uint8_t* data, const uint32_t width, const uint32_t height, const uint32_t channels = 4, const TextureProperties& = TextureProperties());
 		Texture(const Image& image, const TextureProperties& properties = TextureProperties());
 		~Texture();
 
+		void setProperties(const TextureProperties& properties);
+
 		void bind() const override;
 		void unbind() const override;
+
+		uint32_t getWidth() const { return width; }
+		uint32_t getHeight() const { return height; }
+		uint32_t getChannels() const { return channels; }
 
 		void bind(const uint32_t slot) const;
 

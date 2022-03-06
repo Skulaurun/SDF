@@ -24,27 +24,40 @@ namespace sdf {
         }
     }
 
-	Texture::Texture(const Image& image, const TextureProperties& properties) : channels(0), width(0), height(0) {
+    Texture::Texture(const uint8_t* data, const uint32_t width, const uint32_t height, const uint32_t channels, const TextureProperties& properties)
+        : width(width), height(height), channels(channels) {
 
-        width = image.getWidth();
-        height = image.getHeight();
-        channels = image.getBytesPerPixel();
+        glGenTextures(1, &id);
+        glBindTexture(GL_TEXTURE_2D, id);
 
-		glGenTextures(1, &id);
-		glBindTexture(GL_TEXTURE_2D, id);
+        setProperties(properties);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, getOpenGLEnum(properties.wrapS));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, getOpenGLEnum(properties.wrapT));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, getOpenGLEnum(properties.minFilter));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, getOpenGLEnum(properties.magFilter));
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
+        glBindTexture(GL_TEXTURE_2D, 0);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, image.getData());
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-	}
+    }
+	Texture::Texture(const Image& image, const TextureProperties& properties)
+        : Texture(
+            image.getData(),
+            image.getWidth(),
+            image.getHeight(),
+            image.getBytesPerPixel(),
+            properties
+        ) {}
 	Texture::~Texture() {
 		glDeleteTextures(1, &id);
 	}
+
+    void Texture::setProperties(const TextureProperties& properties) {
+
+        bind();
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, getOpenGLEnum(properties.wrapS));
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, getOpenGLEnum(properties.wrapT));
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, getOpenGLEnum(properties.minFilter));
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, getOpenGLEnum(properties.magFilter));
+
+    }
 
     void Texture::bind() const {
         glBindTexture(GL_TEXTURE_2D, id);
