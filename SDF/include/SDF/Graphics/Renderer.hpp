@@ -2,6 +2,7 @@
 
 #include "../Core/Vector.hpp"
 #include "OpenGL/Shader.hpp"
+#include "OpenGL/Texture.hpp"
 #include "Camera2D.hpp"
 #include "Matrix.hpp"
 
@@ -15,8 +16,8 @@ namespace sdf {
 	struct Vertex {
 		Vec2f position;
 		Vec4f color;
-		//math::Vec2f textureCoordinate;
-		//float samplerID;
+		Vec2f textureCoordinate;
+		float samplerID;
 	};
 
 	struct RendererStatistics {
@@ -36,9 +37,9 @@ namespace sdf {
 
 		static void clear(const Vec4f& color = Vec4f(0.0f));
 
-		//static void beginScene(const scene::Camera& camera);
-
 		static void drawQuad(const Mat4f& transform, const Vec4f& color);
+		static void drawQuad(const Mat4f& transform, const std::shared_ptr<Texture>& texture, const Vec4f& color = Vec4f(1.0f));
+
 		static void flush();
 
 		static void beginShader(const std::shared_ptr<Shader>& shader);
@@ -51,6 +52,9 @@ namespace sdf {
 
 		static const void resetStatistics() { statistics = { 0, 0 }; }
 		static const RendererStatistics getStatistics() { return statistics; }
+
+	private:
+		static void drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID);
 
 	private:
 		static std::stack<std::shared_ptr<Shader>> shaders;
