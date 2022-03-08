@@ -80,6 +80,9 @@ namespace sdf {
             return false;
         }
 
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         std::shared_ptr<Shader> shader = std::make_shared<Shader>(std::vector<ShaderSource>{
             { ShaderType::VertexShader, DEFAULT_VERTEX_SHADER },
             { ShaderType::FragmentShader, DEFAULT_FRAGMENT_SHADER }
@@ -223,7 +226,7 @@ namespace sdf {
         shader->bind();
 
         auto& camera = cameras.top();
-        shader->setUniform("uProjection", camera->getProjectionMatrix());
+        shader->setUniform("uProjection", camera->getViewProjectionMatrix());
 
         for (std::size_t i = 0; i < textureIndex; i++) {
             textures[i]->bind(i);
