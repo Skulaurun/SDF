@@ -21,6 +21,8 @@ static void* getGLFunction(const char* name) {
 
 namespace sdf {
 
+    GLEnablePtr                     glEnable                    = nullptr;
+    GLBlendFuncPtr                  glBlendFunc                 = nullptr;
     GLClearPtr                      glClear                     = nullptr;
     GLClearColorPtr                 glClearColor                = nullptr;
     GLViewportPtr                   glViewport                  = nullptr;
@@ -71,6 +73,8 @@ namespace sdf {
             return false;
         }
 
+        LOAD_GL_FUNCTION(GLEnablePtr, glEnable);
+        LOAD_GL_FUNCTION(GLBlendFuncPtr, glBlendFunc);
         LOAD_GL_FUNCTION(GLClearPtr, glClear);
         LOAD_GL_FUNCTION(GLClearColorPtr, glClearColor);
         LOAD_GL_FUNCTION(GLViewportPtr, glViewport);

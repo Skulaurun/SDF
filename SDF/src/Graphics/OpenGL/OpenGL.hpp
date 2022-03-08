@@ -4,10 +4,18 @@
 
 namespace sdf {
 
+    /*
+        GL_xxx enum values source - official Khronos headers
+        https://cvs.khronos.org/svn/repos/ogl/trunk/doc/registry/public/api/GL/glcorearb.h
+    */
+
     enum {
         GL_TRUE = 1,
         GL_FALSE = 0,
         GL_VERSION = 0x1F02,
+        GL_BLEND = 0x0BE2,
+        GL_SRC_ALPHA = 0x0302,
+        GL_ONE_MINUS_SRC_ALPHA = 0x0303,
         GL_TRIANGLES = 0x0004,
         GL_ARRAY_BUFFER = 0x8892,
         GL_ELEMENT_ARRAY_BUFFER = 0x8893,
@@ -57,6 +65,8 @@ namespace sdf {
     using GLfloat = float;
 
     // Prepend with '_'?
+    using GLEnablePtr = void(__stdcall*)(GLenum cap);
+    using GLBlendFuncPtr = void(__stdcall*)(GLenum sfactor, GLenum dfactor);
     using GLClearPtr = void(__stdcall*)(GLbitfield mask);
     using GLClearColorPtr = void(__stdcall*)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
     using GLViewportPtr = void(__stdcall*)(GLint x, GLint y, GLsizei width, GLsizei height);
@@ -100,6 +110,8 @@ namespace sdf {
     using GLUniformMatrix3fvPtr = void(__stdcall*)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
     using GLUniformMatrix4fvPtr = void(__stdcall*)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 
+    extern GLEnablePtr glEnable;
+    extern GLBlendFuncPtr glBlendFunc;
     extern GLClearPtr glClear;
     extern GLClearColorPtr glClearColor;
     extern GLViewportPtr glViewport;
