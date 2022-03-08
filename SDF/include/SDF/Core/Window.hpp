@@ -56,8 +56,14 @@ namespace sdf {
 
         void onMove(LPARAM lParam);
         void onSize(LPARAM lParam);
-        void onMouseInteract(WPARAM wParam, LPARAM lParam);
+        
+        void onMouseMove(WPARAM wParam, LPARAM lParam);
+        void onMouseScroll(WPARAM wParam, LPARAM lParam, uint8_t isVertical);
+        void onMouseButtonInteract(WPARAM wParam, LPARAM lParam, uint8_t isPressed);
+
         void onKeyboardInteract(WPARAM wParam, LPARAM lParam);
+
+        static uint8_t getCommonInputMask();
 
     private:
         std::wstring title;

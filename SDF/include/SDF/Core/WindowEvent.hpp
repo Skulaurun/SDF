@@ -113,4 +113,111 @@ namespace sdf {
 
     };
 
+    class WindowMouseEvent : public WindowInputEvent {
+
+    public:
+        WindowMouseEvent(
+            Window& window,
+            const uint8_t mask,
+            const int32_t x,
+            const int32_t y
+        ) :
+            WindowInputEvent(window, mask),
+            x(x),
+            y(y)
+        {}
+
+        int32_t getX() const { return x; }
+        int32_t getY() const { return y; }
+
+        virtual const std::type_info& getType() const override { return typeid(WindowMouseEvent); }
+
+    private:
+        int32_t x, y;
+
+    };
+
+    class WindowMouseMoveEvent : public WindowMouseEvent {
+
+    public:
+        WindowMouseMoveEvent(
+            Window& window,
+            const uint8_t mask,
+            const int32_t mouseX,
+            const int32_t mouseY
+        ) :
+            WindowMouseEvent(
+                window,
+                mask,
+                mouseX,
+                mouseY
+            )
+        {}
+
+        virtual const std::type_info& getType() const override { return typeid(WindowMouseMoveEvent); }
+
+    };
+
+    class WindowMouseScrollEvent : public WindowMouseEvent {
+
+    public:
+        WindowMouseScrollEvent(
+            Window& window,
+            const uint8_t mask,
+            const int32_t mouseX,
+            const int32_t mouseY,
+            const float scrollX,
+            const float scrollY
+        ) :
+            WindowMouseEvent(
+                window,
+                mask,
+                mouseX,
+                mouseY
+            ),
+            scrollX(scrollX),
+            scrollY(scrollY)
+        {}
+
+        float getScrollX() const { return scrollX; }
+        float getScrollY() const { return scrollY; }
+
+        virtual const std::type_info& getType() const override { return typeid(WindowMouseScrollEvent); }
+
+    private:
+        float scrollX, scrollY;
+
+    };
+
+    class WindowMouseButtonEvent : public WindowMouseEvent {
+
+    public:
+        WindowMouseButtonEvent(
+            Window& window,
+            const uint8_t mask,
+            const uint32_t mouseX,
+            const uint32_t mouseY,
+            const Input::Button button
+        ) :
+            WindowMouseEvent(
+                window,
+                mask,
+                mouseX,
+                mouseY
+            ),
+            buttonPressed((mask >> 3) & 1u),
+            button(button)
+        {}
+
+        bool isButtonPressed() const { return buttonPressed; }
+        Input::Button getButton() const { return button; }
+
+        virtual const std::type_info& getType() const override { return typeid(WindowMouseButtonEvent); }
+
+    private:
+        bool buttonPressed;
+        Input::Button button;
+
+    };
+
 }

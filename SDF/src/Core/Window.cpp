@@ -73,39 +73,27 @@ namespace sdf {
 
         switch (message) {
 
-        case WM_DESTROY:
-            PostQuitMessage(0);
-            return 0;
+        case WM_CLOSE: emitEvent(WindowCloseEvent(*this)); return 0;
+        case WM_DESTROY: PostQuitMessage(0);               return 0;
 
-        case WM_CLOSE:
-            emitEvent(WindowCloseEvent(*this));
-            return 0;
+        case WM_MOVE: onMove(lParam); return 0;
+        case WM_SIZE: onSize(lParam); return 0;
 
-        case WM_MOVE:
-            onMove(lParam);
-            return 0;
+        case WM_MOUSEMOVE: onMouseMove(wParam, lParam); return 0;
 
-        case WM_SIZE:
-            onSize(lParam);
-            return 0;
+        case WM_LBUTTONDOWN: onMouseButtonInteract(VK_LBUTTON, lParam, true); return 0;
+        case WM_RBUTTONDOWN: onMouseButtonInteract(VK_RBUTTON, lParam, true); return 0;
+        case WM_MBUTTONDOWN: onMouseButtonInteract(VK_MBUTTON, lParam, true); return 0;
 
-        case WM_MOUSEMOVE:
-            onMouseInteract(wParam, lParam);
-            return 0;
+        case WM_LBUTTONUP: onMouseButtonInteract(VK_LBUTTON, lParam, false); return 0;
+        case WM_RBUTTONUP: onMouseButtonInteract(VK_RBUTTON, lParam, false); return 0;
+        case WM_MBUTTONUP: onMouseButtonInteract(VK_MBUTTON, lParam, false); return 0;
 
-        case WM_LBUTTONDOWN:
-        case WM_RBUTTONDOWN:
-        case WM_MBUTTONDOWN:
-        case WM_XBUTTONDOWN:
-            onMouseInteract(wParam, lParam);
-            return 0;
+        case WM_XBUTTONUP: onMouseButtonInteract(GET_XBUTTON_WPARAM(wParam) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2, lParam, false);    return 1;
+        case WM_XBUTTONDOWN: onMouseButtonInteract(GET_XBUTTON_WPARAM(wParam) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2, lParam, true);   return 1;
 
-        case WM_LBUTTONUP:
-        case WM_RBUTTONUP:
-        case WM_MBUTTONUP:
-        case WM_XBUTTONUP:
-            onMouseInteract(wParam, lParam);
-            return 0;
+        case WM_MOUSEWHEEL: onMouseScroll(wParam, lParam, true);   return 0;
+        case WM_MOUSEHWHEEL: onMouseScroll(wParam, lParam, false); return 0;
 
         case WM_KEYDOWN:
         case WM_SYSKEYDOWN:
@@ -140,38 +128,41 @@ namespace sdf {
         emitEvent(WindowResizeEvent(*this, width, height));
 
     }
-    void Window::onMouseInteract(WPARAM wParam, LPARAM lParam) {
-        
-        // From MSDN: https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttondown#remarks
-        // To detect that the ALT key was pressed, check whether GetKeyState with VK_MENU < 0.
-        // Note, this must not be GetAsyncKeyState.
 
-        uint32_t posX = GET_X_LPARAM(lParam);
-        uint32_t posY = GET_Y_LPARAM(lParam);
+    void Window::onMouseMove(WPARAM wParam, LPARAM lParam) {
 
-        if (wParam != 0) {
+        emitEvent(WindowMouseMoveEvent(
+            *this,
+            getCommonInputMask(),
+            GET_X_LPARAM(lParam),
+            GET_Y_LPARAM(lParam)
+        ));
 
-            // emit buttonup or buttondown event
+    }
+    void Window::onMouseScroll(WPARAM wParam, LPARAM lParam, uint8_t isVertical) {
 
-            bool isAltDown = GetKeyState(VK_MENU) < 0;
+        float delta = GET_WHEEL_DELTA_WPARAM(wParam) / (float)WHEEL_DELTA;
 
-            //emitEvent(WindowMouseButtonEvent(
-            //	*this,
-            //	wParam & MK_CONTROL,
-            //	wParam & MK_SHIFT,
-            //	posX, posY,
-            //
-            //));
+        emitEvent(WindowMouseScrollEvent(
+            *this,
+            getCommonInputMask(),
+            GET_X_LPARAM(lParam),
+            GET_Y_LPARAM(lParam),
+            !isVertical * delta,
+             isVertical * delta
+        ));
 
-        } else {
-            // emit mouse move event
-        }
+    }
+    void Window::onMouseButtonInteract(WPARAM wParam, LPARAM lParam, uint8_t isPressed) {
 
-        //bool isLeftButton = wParam & MK_LBUTTON;
-
-        // TODO: Add support for Ctrl, Shift, Alt, etc.
-        
-        //lastEvent.mouse.button = Input::getButton(wParam);
+        emitEvent(WindowMouseButtonEvent(
+            *this,
+            getCommonInputMask() |
+            (isPressed << 3),
+            GET_X_LPARAM(lParam),
+            GET_Y_LPARAM(lParam),
+            Input::toButton(wParam)
+        ));
 
     }
     void Window::onKeyboardInteract(WPARAM wParam, LPARAM lParam) {
@@ -191,10 +182,8 @@ namespace sdf {
 
         }
 
+        uint8_t mask = getCommonInputMask();
         Input::Key key = Input::toKey((int32_t)wParam);
-        uint8_t mask = ((uint8_t)(GetKeyState(VK_CONTROL) < 0) << 0) |
-                       ((uint8_t)(GetKeyState(VK_SHIFT) < 0)   << 1) |
-                       ((uint8_t)(GetKeyState(VK_MENU) < 0)    << 2);
 
         if (currentState == 0) {
             if (previousState == 0 || keyAutoRepeat == true) {
@@ -209,6 +198,12 @@ namespace sdf {
             ));
         }
 
+    }
+
+    uint8_t Window::getCommonInputMask() {
+        return ((uint8_t)(GetKeyState(VK_CONTROL) < 0) << 0) |
+               ((uint8_t)(GetKeyState(VK_SHIFT)   < 0) << 1) |
+               ((uint8_t)(GetKeyState(VK_MENU)    < 0) << 2);
     }
 
     void Window::defaultEventCallback(const WindowEvent& e) {
