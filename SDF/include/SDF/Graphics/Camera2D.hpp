@@ -11,10 +11,12 @@ namespace sdf {
 
 		void setProjection(const float left, const float right, const float bottom, const float top);
 
+		void setZoom(const float zoom) { this->zoom = zoom; recalculateMatrix(); }
 		void setRotation(const float rotation) { this->rotation = rotation; recalculateMatrix(); }
 		void setPosition(const Vec3f& position) { this->position = position; recalculateMatrix(); }
 		void setProjectionMatrix(const Mat4f& projection) { this->projectionMatrix = projection; recalculateMatrix(); }
 
+		float getZoom() const { return zoom; }
 		float getRotation() const { return rotation; }
 		Vec3f getPosition() const { return position; }
 
@@ -26,6 +28,7 @@ namespace sdf {
 		void recalculateMatrix();
 
 	private:
+		float zoom;
 		float rotation;
 		Vec3f position;
 		Mat4f viewMatrix;
