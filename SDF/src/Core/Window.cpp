@@ -37,8 +37,7 @@ namespace sdf {
         RECT rect = { 0, 0, (LONG)width, (LONG)height };
         AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, FALSE, NULL);
 
-        hWindow = CreateWindowEx(
-            0,
+        hWindow = CreateWindow(
             descriptor.windowClass.lpszClassName,
             (LPCWSTR)title.c_str(),
             WS_OVERLAPPEDWINDOW,
