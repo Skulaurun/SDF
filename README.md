@@ -1,5 +1,9 @@
 # Simple Dedicated Framework (SDF)
 
+[![build](https://github.com/Skulaurun/SDF/actions/workflows/msbuild.yml/badge.svg?branch=main)](https://github.com/Skulaurun/SDF/actions/workflows/msbuild.yml)
+![release](https://img.shields.io/github/v/release/Skulaurun/SDF)
+![license](https://img.shields.io/github/license/Skulaurun/SDF?color=blue)
+
 A framework **dedicated** to operating system Windows, **simple** easy to use API.
 
 ### Example of Window creation
