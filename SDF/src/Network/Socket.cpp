@@ -147,7 +147,7 @@ namespace sdf {
 
         uint16_t port = ntohs(SS_PORT(info));
         std::string address(NI_MAXHOST, '\0');
-        if (getnameinfo(info, length, address.data(), address.size(), NULL, 0, NI_NUMERICHOST) == 0) {
+        if (getnameinfo(info, length, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0) {
             // error
         }
 
