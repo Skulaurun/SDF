@@ -168,7 +168,7 @@ namespace sdf {
             (isPressed << 3),
             GET_X_LPARAM(lParam),
             GET_Y_LPARAM(lParam),
-            Input::toButton(wParam)
+            Input::toButton((int32_t)wParam)
         ));
 
     }
