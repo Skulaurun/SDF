@@ -197,12 +197,12 @@ namespace sdf {
         float samplerId = 0.0f;
         for (std::size_t i = 0; i < textures.size(); i++) {
             if (texture == textures[i]) {
-                samplerId = i;
+                samplerId = (float)i;
             }
         }
 
         if (samplerId == 0.0f) {
-            samplerId = textureIndex;
+            samplerId = (float)textureIndex;
             textures[textureIndex++] = texture;
         }
 
