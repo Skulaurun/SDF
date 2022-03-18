@@ -244,26 +244,16 @@ namespace sdf {
 
         statistics.batchCount += 1;
         vertexPtr = vertices.get();
-        indexCount = 0;
         textureIndex = 1;
+        indexCount = 0;
 
     }
 
-    void Renderer::beginShader(const std::shared_ptr<Shader>& shader) {
-        shaders.push(shader);
-    }
+    void Renderer::beginShader(const std::shared_ptr<Shader>& shader) { shaders.push(shader); }
+    void Renderer::endShader() { shaders.pop(); }
 
-    void Renderer::endShader() {
-        shaders.pop();
-    }
-
-    void Renderer::beginCamera(const std::shared_ptr<Camera2D>& camera) {
-        cameras.push(camera);
-    }
-
-    void Renderer::endCamera() {
-        cameras.pop();
-    }
+    void Renderer::beginCamera(const std::shared_ptr<Camera2D>& camera) { cameras.push(camera); }
+    void Renderer::endCamera() { cameras.pop(); }
 
     void Renderer::setViewport(const Vec2i& position, const Vec2u& size) {
         glViewport(position.x, position.y, size.x, size.y);
