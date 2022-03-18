@@ -236,7 +236,7 @@ namespace sdf {
         auto& camera = cameras.top();
         shader->setUniform("uProjection", camera->getViewProjectionMatrix());
 
-        for (std::size_t i = 0; i < textureIndex; i++) {
+        for (uint32_t i = 0; i < textureIndex; i++) {
             textures[i]->bind(i);
         }
 
