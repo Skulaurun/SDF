@@ -35,7 +35,7 @@ namespace sdf {
             AddressFamily family = toAddressFamily(ptr->ai_family);
         
             std::string address(NI_MAXHOST, '\0');
-            if (getnameinfo(ptr->ai_addr, ptr->ai_addrlen, address.data(), address.size(), NULL, 0, NI_NUMERICHOST) == 0) {
+            if (getnameinfo(ptr->ai_addr, ptr->ai_addrlen, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0) {
                 // error
             }
 
