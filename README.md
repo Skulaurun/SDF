@@ -1,8 +1,8 @@
 # Simple Dedicated Framework (SDF)
 
 [![build](https://github.com/Skulaurun/SDF/actions/workflows/msbuild.yml/badge.svg?branch=main)](https://github.com/Skulaurun/SDF/actions/workflows/msbuild.yml)
-![release](https://img.shields.io/github/v/release/Skulaurun/SDF)
-![license](https://img.shields.io/github/license/Skulaurun/SDF?color=blue)
+[![release](https://img.shields.io/github/v/release/Skulaurun/SDF)](https://github.com/Skulaurun/SDF/releases/latest)
+[![license](https://img.shields.io/github/license/Skulaurun/SDF?color=blue)](https://github.com/Skulaurun/SDF/blob/main/LICENSE)
 
 A framework **dedicated** to operating system Windows, **simple** easy to use API.
 
