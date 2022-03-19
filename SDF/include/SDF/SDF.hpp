@@ -57,6 +57,7 @@
 #include "Graphics/OpenGL/Texture.hpp"
 
 #include "Graphics/Camera2D.hpp"
+#include "Graphics/Transform.hpp"
 #include "Graphics/Renderer.hpp"
 
 /* Network Module */
