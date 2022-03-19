@@ -7,9 +7,22 @@
 */
 
 #include <PCH.hpp>
+#include <SDF/Core/Exception.hpp>
 #include <SDF/Network/Socket.hpp>
 
+#include "Core/WinError.hpp"
+
 #pragma comment (lib, "Ws2_32.lib")
+
+#define WSA_THROW() { \
+    WinError error = WinError::getLastWSAError(); \
+    throw NetworkException(error.message, error.code); \
+}
+
+#define WSA_ASSERT(x) \
+    if (!(x)) { \
+        WSA_THROW(); \
+    }
 
 namespace sdf {
 
@@ -33,9 +46,7 @@ namespace sdf {
         }
 
         socket = ::socket(AF_UNSPEC, socketType, toNativeProtocol(protocol));
-        if (socket == INVALID_SOCKET) {
-            // error
-        }
+        WSA_ASSERT(socket != INVALID_SOCKET);
 
     }
 
@@ -62,41 +73,27 @@ namespace sdf {
     }
     
     void Socket::bind(sockaddr* address, int32_t length) const {
-
-        if (::bind(socket, address, length) == SOCKET_ERROR) {
-            // error
-        }
-
+        WSA_ASSERT(::bind(socket, address, length) != SOCKET_ERROR);
     }
 
     void Socket::connect(const sdf::AddressInfo& info) {
 
         for (const auto& address : info.getAddressList()) {
-
             if (::connect(socket, address.storage, sizeof(sockaddr_storage)) != SOCKET_ERROR) {
                 return;
             }
-
         }
 
-        // throw an error
+        WSA_THROW();
 
     }
 
     void Socket::listen() {
-
-        if (::listen(socket, SOMAXCONN) == SOCKET_ERROR) {
-            // error
-        }
-
+        WSA_ASSERT(::listen(socket, SOMAXCONN) != SOCKET_ERROR);
     }
 
     void Socket::send(const char* buffer, const std::size_t length) const {
-
-        if (::send(socket, buffer, length, 0) == SOCKET_ERROR) {
-            // error
-        }
-
+        WSA_ASSERT(::send(socket, buffer, length, 0) != SOCKET_ERROR);
     }
 
     bool Socket::receive(char* buffer, const std::size_t length) const {
@@ -105,7 +102,7 @@ namespace sdf {
         if (result == 0) {
             return false;
         } else if (result < 0) {
-            // error (throw an exception)
+            WSA_THROW();
             return false;
         }
 
@@ -121,10 +118,7 @@ namespace sdf {
 
         sockaddr_storage storage = {};
         int32_t length = sizeof(sockaddr_storage);
-        
-        if (getsockname(socket, (sockaddr*)&storage, &length) == SOCKET_ERROR) {
-            // error
-        }
+        WSA_ASSERT(getsockname(socket, (sockaddr*)&storage, &length) != SOCKET_ERROR);
 
         return getNameInfo((sockaddr*)&storage, length);
 
@@ -134,10 +128,7 @@ namespace sdf {
 
         sockaddr_storage storage = {};
         int32_t length = sizeof(sockaddr_storage);
-
-        if (getpeername(socket, (sockaddr*)&storage, &length) == SOCKET_ERROR) {
-            // error
-        }
+        WSA_ASSERT(getpeername(socket, (sockaddr*)&storage, &length) != SOCKET_ERROR);
 
         return getNameInfo((sockaddr*)&storage, length);
 
@@ -147,9 +138,7 @@ namespace sdf {
 
         uint16_t port = ntohs(SS_PORT(info));
         std::string address(NI_MAXHOST, '\0');
-        if (getnameinfo(info, length, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0) {
-            // error
-        }
+        WSA_ASSERT(getnameinfo(info, length, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0);
 
         return { port, address };
 
@@ -161,9 +150,7 @@ namespace sdf {
         int32_t length = sizeof(sockaddr_storage);
 
         SOCKET client = ::accept(socket, (sockaddr*)&storage, &length);
-        if (client == INVALID_SOCKET) {
-            // error
-        }
+        WSA_ASSERT(client != INVALID_SOCKET);
 
         return {
             std::make_shared<Socket>(client),
