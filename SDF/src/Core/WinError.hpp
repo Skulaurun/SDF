@@ -20,6 +20,12 @@ namespace sdf {
 		std::string message;
 
 		static WinError getLastError();
+		static WinError getLastWSAError();
+
+		static WinError fromCOM(const HRESULT hResult);
+
+	private:
+		static WinError formatMessage(const DWORD messageId);
 
 	};
 

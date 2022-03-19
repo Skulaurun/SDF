@@ -8,7 +8,16 @@
 
 #include <PCH.hpp>
 
-#include "SDF/Graphics/Image.hpp"
+#include <SDF/Core/Exception.hpp>
+#include <SDF/Graphics/Image.hpp>
+
+#include "Core/WinError.hpp"
+
+#define COM_CALL(hResult) \
+    if (FAILED(hResult)) { \
+        WinError error = WinError::fromCOM(hResult); \
+        throw SystemException(error.message, error.code); \
+    }
 
 namespace sdf {
 
@@ -21,15 +30,14 @@ namespace sdf {
         public:
             ImageFactory(IWICImagingFactory** factory) {
 
-                HRESULT hResult = S_OK;
-                hResult = CoInitialize(0);
+                COM_CALL(CoInitialize(0));
 
-                hResult = CoCreateInstance(
+                COM_CALL(CoCreateInstance(
                     CLSID_WICImagingFactory,
                     NULL,
                     CLSCTX_INPROC_SERVER,
                     IID_PPV_ARGS(factory)
-                );
+                ));
 
             }
 
@@ -40,6 +48,8 @@ namespace sdf {
 
         };
 
+        // THIS IS OK, IT WILL GET INITIALIZED
+        // ON THE FIRST CONSTRUCTOR CALL
         static ImageFactory staticFactory(&factory);
 
     }
@@ -50,9 +60,9 @@ namespace sdf {
     Image::Image(uint8_t* buffer, const uint32_t size) : Image() {
 
         IWICStream* stream = NULL;
-        HRESULT hResult = factory->CreateStream(&stream);
+        COM_CALL(factory->CreateStream(&stream));
 
-        stream->InitializeFromMemory(buffer, size);
+        COM_CALL(stream->InitializeFromMemory(buffer, size));
         decodeImage(stream);
         stream->Release();
 
@@ -61,46 +71,43 @@ namespace sdf {
     Image::Image(const std::filesystem::path& path) : Image() {
 
         IWICStream* stream = NULL;
-        HRESULT hResult = factory->CreateStream(&stream);
+        COM_CALL(factory->CreateStream(&stream));
 
-        stream->InitializeFromFilename(path.c_str(), GENERIC_READ);
+        COM_CALL(stream->InitializeFromFilename(path.c_str(), GENERIC_READ));
         decodeImage(stream);
         stream->Release();
 
     }
 
-    // TODO: Check HRESULTs and throw exceptions (comdef.h?)
     void Image::decodeImage(IWICStream* stream) {
 
-        HRESULT hResult = S_OK;
-
         IWICBitmapDecoder* decoder = NULL;
-        hResult = factory->CreateDecoderFromStream(
+        COM_CALL(factory->CreateDecoderFromStream(
             stream,
             NULL,
             WICDecodeMetadataCacheOnDemand,
             &decoder
-        );
+        ));
 
         UINT frameCount = 0;
-        hResult = decoder->GetFrameCount(&frameCount);
+        COM_CALL(decoder->GetFrameCount(&frameCount));
 
         IWICBitmapFrameDecode* decoderFrame = NULL;
-        hResult = decoder->GetFrame(0, &decoderFrame);
+        COM_CALL(decoder->GetFrame(0, &decoderFrame));
 
-        hResult = decoderFrame->GetSize((UINT*)&width, (UINT*)&height);
+        COM_CALL(decoderFrame->GetSize((UINT*)&width, (UINT*)&height));
 
         WICRect rect = { 0, 0, (INT)width, (INT)height };
 
         WICPixelFormatGUID pixelFormatGUID;
-        hResult = decoderFrame->GetPixelFormat(&pixelFormatGUID);
+        COM_CALL(decoderFrame->GetPixelFormat(&pixelFormatGUID));
 
         IWICComponentInfo* componentInfo = NULL;
         IWICPixelFormatInfo* pixelFormatInfo = NULL;
-        hResult = factory->CreateComponentInfo(pixelFormatGUID, &componentInfo);
-        hResult = componentInfo->QueryInterface(__uuidof(IWICPixelFormatInfo), (void**)&pixelFormatInfo);
+        COM_CALL(factory->CreateComponentInfo(pixelFormatGUID, &componentInfo));
+        COM_CALL(componentInfo->QueryInterface(__uuidof(IWICPixelFormatInfo), (void**)&pixelFormatInfo));
 
-        hResult = pixelFormatInfo->GetBitsPerPixel(&bytesPerPixel);
+        COM_CALL(pixelFormatInfo->GetBitsPerPixel(&bytesPerPixel));
         bytesPerPixel /= 8;
 
         UINT stride = bytesPerPixel * width;
@@ -111,11 +118,12 @@ namespace sdf {
             throw std::bad_alloc();
         }
 
-        hResult = decoderFrame->CopyPixels(&rect, stride, bufferSize, buffer);
+        HRESULT hResult = decoderFrame->CopyPixels(&rect, stride, bufferSize, buffer);
         if (SUCCEEDED(hResult)) {
             data = (uint8_t*)buffer;
         } else {
             free(buffer);
+            COM_CALL(hResult);
         }
 
         decoderFrame->Release();

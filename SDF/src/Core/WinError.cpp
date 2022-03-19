@@ -12,15 +12,28 @@
 
 #include <system_error>
 
+#pragma comment (lib, "Ws2_32.lib")
+
 namespace sdf {
 
     WinError WinError::getLastError() {
+        return formatMessage(GetLastError());
+    }
 
-        DWORD error = GetLastError();
-        if (error == 0) {
-            return { error, "" };
+    WinError WinError::getLastWSAError() {
+        return formatMessage(WSAGetLastError());
+    }
+
+    WinError WinError::fromCOM(const HRESULT hResult) {
+        return formatMessage(HRESULT_CODE(hResult));
+    }
+
+    WinError WinError::formatMessage(const DWORD messageId) {
+
+        if (messageId == 0) {
+            return { messageId, "" };
         }
-
+        
         // TODO: Fix language, guarantee English
 
         LPSTR buffer = {};
@@ -29,7 +42,7 @@ namespace sdf {
             FORMAT_MESSAGE_ALLOCATE_BUFFER |
             FORMAT_MESSAGE_IGNORE_INSERTS,
             NULL,
-            error,
+            messageId,
             0,
             (LPSTR)&buffer,
             0,
@@ -48,7 +61,7 @@ namespace sdf {
             LocalFree(p);
         });
 
-        return { error, std::string(ptr.get(), size) };
+        return { messageId, std::string(ptr.get(), size) };
 
     }
 
