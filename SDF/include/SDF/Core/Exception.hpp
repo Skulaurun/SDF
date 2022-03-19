@@ -34,4 +34,12 @@ namespace sdf {
 
     };
 
+    class NetworkException : public SystemException {
+
+    public:
+        explicit NetworkException(const std::string& message, const uint64_t code) noexcept
+            : SystemException(message, code) {}
+
+    };
+
 }
