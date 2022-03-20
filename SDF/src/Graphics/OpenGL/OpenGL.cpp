@@ -8,6 +8,7 @@
 
 #include <PCH.hpp>
 
+#include "Core/WGL.hpp"
 #include "OpenGL.hpp"
 
 #pragma comment (lib, "opengl32.lib")
@@ -81,6 +82,8 @@ namespace sdf {
             return false;
         }
 
+        loadWGLFunctions(getGLFunction);
+
         LOAD_GL_FUNCTION(GLEnablePtr, glEnable);
         LOAD_GL_FUNCTION(GLBlendFuncPtr, glBlendFunc);
         LOAD_GL_FUNCTION(GLClearPtr, glClear);
@@ -126,7 +129,7 @@ namespace sdf {
         LOAD_GL_FUNCTION(GLUniformMatrix3fvPtr, glUniformMatrix3fv);
         LOAD_GL_FUNCTION(GLUniformMatrix4fvPtr, glUniformMatrix4fv);
 
-        // FreeLibrary
+        FreeLibrary(glLibrary);
 
         return true;
 
