@@ -10,6 +10,7 @@
 
 #include <SDF/Core/Exception.hpp>
 #include <SDF/Core/Window.hpp>
+#include <SDF/Graphics/Renderer.hpp>
 
 #include "WinError.hpp"
 #include "Graphics/OpenGL/OpenGL.hpp"
@@ -56,6 +57,8 @@ namespace sdf {
 
         SYS_ASSERT(makeCurrent());
         SYS_ASSERT(loadGLFunctions());
+
+        Renderer::init();
 
         /* TODO: Create modern OpenGL context */
 
