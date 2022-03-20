@@ -340,6 +340,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClInclude Include="include\SDF\Graphics\RendererObject.hpp" />
     <ClInclude Include="include\SDF\Graphics\Transform.hpp" />
     <ClInclude Include="include\SDF\Network\AddressInfo.hpp" />
+    <ClInclude Include="include\SDF\Network\ByteStream.hpp" />
     <ClInclude Include="include\SDF\Network\Network.hpp" />
     <ClInclude Include="include\SDF\Network\NetworkException.hpp" />
     <ClInclude Include="include\SDF\Network\Socket.hpp" />
@@ -375,6 +376,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClCompile Include="src\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\Network\AddressInfo.cpp" />
+    <ClCompile Include="src\Network\ByteStream.cpp" />
     <ClCompile Include="src\Network\Network.cpp" />
     <ClCompile Include="src\Network\Socket.cpp" />
     <ClCompile Include="src\PCH.cpp">
