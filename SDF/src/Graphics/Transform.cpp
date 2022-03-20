@@ -32,8 +32,8 @@ namespace sdf {
     void Transform::updateMatrix() {
         matrix = sdf::Mat4f(1.0f)
             * sdf::translate(sdf::Vec3f(position.x, position.y, 0.0f))
-            * sdf::scale(sdf::Vec3f(size.x, size.y, 0.0f))
-            * sdf::rotate(rotation, sdf::Vec3f(0.0f, 0.0f, 1.0f));
+            * sdf::rotate(rotation, sdf::Vec3f(0.0f, 0.0f, 1.0f))
+            * sdf::scale(sdf::Vec3f(size.x, size.y, 0.0f));
     }
 
 }
