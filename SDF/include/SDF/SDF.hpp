@@ -1,6 +1,6 @@
 /*
 *   SDF - Simple Dedicated Framework
-*   Version: 1.1.1
+*   Version: 1.2.0
 *   <https://github.com/Skulaurun/SDF>
 *   
 *   Licensed under the MIT License <https://opensource.org/licenses/MIT>.
@@ -29,8 +29,8 @@
 #pragma once
 
 #define SDF_VERSION_MAJOR 1
-#define SDF_VERSION_MINOR 1
-#define SDF_VERSION_PATCH 1
+#define SDF_VERSION_MINOR 2
+#define SDF_VERSION_PATCH 0
 
 /* Core Module */
 
