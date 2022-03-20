@@ -73,8 +73,8 @@ namespace sdf {
         static_assert(std::is_arithmetic_v<T>);
 
     public:
-        constexpr Vector3D() : x(0), y(0) {}
-        constexpr Vector3D(const T& n) : x(n), y(n) {}
+        constexpr Vector3D() : x(0), y(0), z(0) {}
+        constexpr Vector3D(const T& n) : x(n), y(n), z(n) {}
         constexpr Vector3D(const T& x, const T& y, const T& z) : x(x), y(y), z(z) {}
 
         constexpr Vector3D(const Vector4D<T>& v) : x(v.x), y(v.y), z(v.z) {}
