@@ -62,6 +62,12 @@ namespace sdf {
 
         /* TODO: Create modern OpenGL context */
 
+        /*
+            From Microsoft documentation: https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-setpixelformat
+            Setting the pixel format of a window more than once can lead to significant complications for the Window Manager and for multithread applications,
+            so it is not allowed. An application can only set the pixel format of a window one time. Once a window's pixel format is set, it cannot be changed.
+        */
+
         /*if (!isWGLExtensionSupported(hDeviceContext, "WGL_ARB_create_context")) {
             throw Exception("An OpenGL extension 'WGL_ARB_create_context' is not supported on this system!");
         }
