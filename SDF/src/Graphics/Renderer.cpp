@@ -78,15 +78,7 @@ namespace sdf {
 
     bool Renderer::init() {
 
-        if (!loadGLFunctions()) {
-            //std::cerr << "Failed to initialize OpenGL!" << std::endl;
-            return false;
-        }
-
-        if (vertexArray) {
-            // ERROR: Renderer already initialized!
-            return false;
-        }
+        if (vertexArray) { return false; }
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -103,13 +95,11 @@ namespace sdf {
         shaders.push(shader);
         shader->bind();
 
-        // Not ideal solution
         std::shared_ptr<Camera2D> camera = std::make_shared<Camera2D>(0.0f, 1.0f, 1.0f, 0.0f);
         camera->setProjectionMatrix(Mat4f(1.0f));
         cameras.push(camera);
 
         vertices = std::make_unique<Vertex[]>(MAX_VERTEX_COUNT);
-
         vertexPtr = vertices.get();
 
         uint32_t* indices = new uint32_t[MAX_INDEX_COUNT];
