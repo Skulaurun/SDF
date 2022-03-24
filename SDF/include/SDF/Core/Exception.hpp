@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2021 Adam Charv·t <https://www.skulaurun.eu>
+* Copyright (c) 2021 Adam Charv√°t <https://www.skulaurun.eu>
 * Licensed under the MIT License,
 * for details see accompanying LICENSE file or a copy at
 * <https://github.com/Skulaurun/SDF/blob/v1.0.0/LICENSE>.
@@ -27,7 +27,7 @@ namespace sdf {
         explicit SystemException(const std::string& message, const uint64_t code) noexcept
             : Exception(message), code(code) {}
 
-        virtual uint64_t error() { return code; }
+        virtual uint64_t error() const { return code; }
 
     private:
         uint64_t code;
