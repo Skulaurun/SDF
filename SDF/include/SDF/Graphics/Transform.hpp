@@ -25,6 +25,7 @@ namespace sdf {
         Vec2f getRotation() const { return rotation; }
 
         const Mat4f& getMatrix() const { return matrix; }
+        operator Mat4f() const { return matrix; }
 
     private:
         Vec2f position;
