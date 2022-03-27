@@ -20,18 +20,18 @@ namespace sdf {
 
         void updateMatrix();
 
-        sdf::Vec2f getPosition() const { return position; }
-        sdf::Vec2f getSize() const { return size; }
-        sdf::Vec2f getRotation() const { return rotation; }
+        Vec2f getPosition() const { return position; }
+        Vec2f getSize() const { return size; }
+        Vec2f getRotation() const { return rotation; }
 
-        const sdf::Mat4f& getMatrix() const { return matrix; }
+        const Mat4f& getMatrix() const { return matrix; }
 
     private:
-        sdf::Vec2f position;
-        sdf::Vec2f size;
+        Vec2f position;
+        Vec2f size;
         float rotation;
 
-        sdf::Mat4f matrix;
+        Mat4f matrix;
 
     };
 
