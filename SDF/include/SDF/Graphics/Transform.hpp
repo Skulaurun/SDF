@@ -22,7 +22,7 @@ namespace sdf {
 
         Vec2f getPosition() const { return position; }
         Vec2f getSize() const { return size; }
-        Vec2f getRotation() const { return rotation; }
+        float getRotation() const { return rotation; }
 
         const Mat4f& getMatrix() const { return matrix; }
         operator Mat4f() const { return matrix; }
