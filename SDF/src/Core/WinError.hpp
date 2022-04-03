@@ -9,8 +9,25 @@
 #pragma once
 
 #include <SDF/Core/WinTypes.hpp>
+#include <SDF/Core/Exception.hpp>
 
 #include <string>
+
+#define WSA_THROW() { \
+    WinError error = WinError::getLastWSAError(); \
+    throw NetworkException(error.message, error.code); \
+}
+
+#define WSA_ASSERT(x) \
+    if (!(x)) { \
+        WSA_THROW(); \
+    }
+
+#define COM_CALL(hResult) \
+    if (FAILED(hResult)) { \
+        WinError error = WinError::fromCOM(hResult); \
+        throw SystemException(error.message, error.code); \
+    }
 
 namespace sdf {
 

@@ -7,22 +7,11 @@
 */
 
 #include <PCH.hpp>
-#include <SDF/Core/Exception.hpp>
 #include <SDF/Network/Socket.hpp>
 
 #include "Core/WinError.hpp"
 
 #pragma comment (lib, "Ws2_32.lib")
-
-#define WSA_THROW() { \
-    WinError error = WinError::getLastWSAError(); \
-    throw NetworkException(error.message, error.code); \
-}
-
-#define WSA_ASSERT(x) \
-    if (!(x)) { \
-        WSA_THROW(); \
-    }
 
 namespace sdf {
 

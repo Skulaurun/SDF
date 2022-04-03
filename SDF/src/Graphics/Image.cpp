@@ -7,17 +7,9 @@
 */
 
 #include <PCH.hpp>
-
-#include <SDF/Core/Exception.hpp>
 #include <SDF/Graphics/Image.hpp>
 
 #include "Core/WinError.hpp"
-
-#define COM_CALL(hResult) \
-    if (FAILED(hResult)) { \
-        WinError error = WinError::fromCOM(hResult); \
-        throw SystemException(error.message, error.code); \
-    }
 
 namespace sdf {
 
