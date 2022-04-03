@@ -8,10 +8,30 @@
 
 #include <PCH.hpp>
 #include <SDF/Network/Network.hpp>
+#include <SDF/Core/Exception.hpp>
 
-namespace sdf::net {
+#include <string>
 
-    bool init() {
+constexpr auto NETWORK_VERSION = MAKEWORD(2, 2);
+
+namespace sdf {
+
+    /*
+        Translation taken from: https://docs.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartup#return-value
+    */
+
+    static const char* translateError(const int code) {
+        switch (code) {
+            case WSASYSNOTREADY: return "The underlying network subsystem is not ready for network communication.";
+            case WSAVERNOTSUPPORTED: return "The version of Windows Sockets support requested is not provided by this particular Windows Sockets implementation.";
+            case WSAEINPROGRESS: return "A blocking Windows Sockets 1.1 operation is in progress.";
+            case WSAEPROCLIM: return "A limit on the number of tasks supported by the Windows Sockets implementation has been reached.";
+            case WSAEFAULT: return "The lpWSAData parameter is not a valid pointer.";
+            default: return "Unknown WSAStartup error code.";
+        }
+    }
+
+    void initNetwork() {
 
         struct Cleaner {
             ~Cleaner() {
@@ -23,18 +43,19 @@ namespace sdf::net {
 
         if (wsaData.wVersion == NULL) {
 
-            static constexpr uint32_t version[2] = { 2, 2 }; // Consider removing static
-
-            int32_t result = ::WSAStartup(MAKEWORD(version[0], version[1]), &wsaData);
-            if (result != 0 || LOBYTE(wsaData.wVersion) != version[0] || HIBYTE(wsaData.wVersion) != version[1]) { // Memory leak, if success but wrong version
-                return false;
+            int result = ::WSAStartup(NETWORK_VERSION, &wsaData);
+            if (result != 0) {
+                // TODO: Use FormatMessage instead?
+                throw SystemException(translateError(result), result);
             }
 
             static Cleaner cleaner;
 
+            if (LOBYTE(wsaData.wVersion) != LOBYTE(NETWORK_VERSION) || HIBYTE(wsaData.wVersion) != HIBYTE(NETWORK_VERSION)) {
+                throw Exception("Could not find usable version of Winsock 2.");
+            }
+
         }
-        
-        return true;
 
     }
 

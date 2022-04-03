@@ -8,8 +8,8 @@
 
 #pragma once
 
-namespace sdf::net {
+namespace sdf {
 
-    bool init();
+    void initNetwork();
 
 }
