@@ -21,65 +21,65 @@
 
 namespace sdf {
 
-	// APIInfo
+    // APIInfo
 
-	struct Vertex {
-		Vec2f position;
-		Vec4f color;
-		Vec2f textureCoordinate;
-		float samplerID;
-	};
+    struct Vertex {
+        Vec2f position;
+        Vec4f color;
+        Vec2f textureCoordinate;
+        float samplerID;
+    };
 
-	struct RendererStatistics {
+    struct RendererStatistics {
 
-		uint32_t batchCount;
-		uint32_t quadCount;
+        uint32_t batchCount;
+        uint32_t quadCount;
 
-		uint32_t getVertexCount() const { return quadCount * 4; }
-		uint32_t getIndexCount() const { return quadCount * 6; }
+        uint32_t getVertexCount() const { return quadCount * 4; }
+        uint32_t getIndexCount() const { return quadCount * 6; }
 
-	};
+    };
 
-	class Renderer {
+    class Renderer {
 
-	public:
-		static bool init();
+    public:
+        static bool init();
 
-		static void clear(const Vec4f& color = Vec4f(0.0f));
+        static void clear(const Vec4f& color = Vec4f(0.0f));
 
-		static void drawQuad(const Mat4f& transform, const Vec4f& color);
-		static void drawQuad(
-			const Mat4f& transform,
-			const std::shared_ptr<Texture>& texture,
-			const Vec4f& color = Vec4f(1.0f),
-			const sdf::Vec4f* textureCoordinates = nullptr
-		);
+        static void drawQuad(const Mat4f& transform, const Vec4f& color);
+        static void drawQuad(
+            const Mat4f& transform,
+            const std::shared_ptr<Texture>& texture,
+            const Vec4f& color = Vec4f(1.0f),
+            const sdf::Vec4f* textureCoordinates = nullptr
+        );
 
-		static void drawSprite(const Sprite& sprite);
-		static void drawText(const Text& text);
+        static void drawSprite(const Sprite& sprite);
+        static void drawText(const Text& text);
 
-		static void flush();
+        static void flush();
 
-		static void beginShader(const std::shared_ptr<Shader>& shader);
-		static void endShader();
+        static void beginShader(const std::shared_ptr<Shader>& shader);
+        static void endShader();
 
-		static void beginCamera(const std::shared_ptr<Camera2D>& camera);
-		static void endCamera();
+        static void beginCamera(const std::shared_ptr<Camera2D>& camera);
+        static void endCamera();
 
-		static void setViewport(const Vec2i& position, const Vec2u& size);
+        static void setViewport(const Vec2i& position, const Vec2u& size);
 
-		static const void resetStatistics() { statistics = { 0, 0 }; }
-		static const RendererStatistics getStatistics() { return statistics; }
+        static const void resetStatistics() { statistics = { 0, 0 }; }
+        static const RendererStatistics getStatistics() { return statistics; }
 
-	private:
-		static void drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID, const sdf::Vec4f* textureCoordinates = nullptr);
+    private:
+        static void drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID, const sdf::Vec4f* textureCoordinates = nullptr);
 
-	private:
-		static std::stack<std::shared_ptr<Shader>> shaders;
-		static std::stack<std::shared_ptr<Camera2D>> cameras;
-		
-		static RendererStatistics statistics;
+    private:
+        static std::stack<std::shared_ptr<Shader>> shaders;
+        static std::stack<std::shared_ptr<Camera2D>> cameras;
+        
+        static RendererStatistics statistics;
 
-	};
+    };
 
 }
