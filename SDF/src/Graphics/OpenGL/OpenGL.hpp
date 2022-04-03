@@ -68,7 +68,7 @@ namespace sdf {
     using GLint = signed int;
     using GLuint = unsigned int;
     using GLenum = unsigned int;
-    using GLsizei = unsigned int; // unsigned?
+    using GLsizei = signed int;
     using GLbitfield = unsigned int;
     using GLfloat = float;
 
