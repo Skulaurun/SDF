@@ -156,7 +156,17 @@ namespace sdf {
         );
     }
 
-    void Renderer::drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID) {
+    template<typename T>
+    Vector4D<T> operator*(const Vector4D<T>& vector1, const Vector4D<T> vector2) {
+        return Vector4D<T>(
+            vector1.x * vector2.x,
+            vector1.y * vector2.y,
+            vector1.z * vector2.z,
+            vector1.w * vector2.w
+        );
+    }
+
+    void Renderer::drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID, const sdf::Vec4f* textureCoordinates) {
 
         constexpr static Vec4f quad[] = {
             { 0.0f, 0.0f, 0.0f, 1.0f },
@@ -165,10 +175,14 @@ namespace sdf {
             { 1.0f, 0.0f, 0.0f, 1.0f }
         };
 
+        if (textureCoordinates == nullptr) {
+            textureCoordinates = quad;
+        }
+
         for (uint32_t i = 0; i < 4; i++) {
             vertexPtr->position = transform * quad[i];
             vertexPtr->color = color;
-            vertexPtr->textureCoordinate = quad[i];
+            vertexPtr->textureCoordinate = textureCoordinates[i];
             vertexPtr->samplerID = samplerID;
             vertexPtr++;
         }
@@ -178,7 +192,7 @@ namespace sdf {
 
     }
 
-    void Renderer::drawQuad(const Mat4f& transform, const std::shared_ptr<Texture>& texture, const Vec4f& color) {
+    void Renderer::drawQuad(const Mat4f& transform, const std::shared_ptr<Texture>& texture, const Vec4f& color, const sdf::Vec4f* textureCoordinates) {
 
         if (indexCount == MAX_INDEX_COUNT || textureIndex == MAX_TEXTURE_COUNT) {
             flush();
@@ -196,7 +210,7 @@ namespace sdf {
             textures[textureIndex++] = texture;
         }
 
-        drawQuad(transform, color, samplerId);
+        drawQuad(transform, color, samplerId, textureCoordinates);
 
     }
     void Renderer::drawQuad(const Mat4f& transform, const Vec4f& color) {
@@ -207,6 +221,31 @@ namespace sdf {
 
         drawQuad(transform, color, 0.0f);
 
+    }
+
+    void Renderer::drawSprite(const Sprite& sprite) {
+
+        Vec4f r = sprite.getNormalizedRegion();
+        Vec4f textureCoordinates[] = {
+            { r.x, r.y, 0.0f, 1.0f },
+            { r.x, r.w, 0.0f, 1.0f },
+            { r.z, r.w, 0.0f, 1.0f },
+            { r.z, r.y, 0.0f, 1.0f }
+        };
+
+        drawQuad(
+            sprite.getTransform(),
+            sprite.getTexture(),
+            sprite.getColor(),
+            textureCoordinates
+        );
+
+    }
+
+    void Renderer::drawText(const Text& text) {
+        for (const auto& sprite : text.getSprites()) {
+            drawSprite(sprite);
+        }
     }
 
     void Renderer::flush() {

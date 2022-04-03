@@ -12,6 +12,8 @@
 #include "OpenGL/Shader.hpp"
 #include "OpenGL/Texture.hpp"
 #include "Camera2D.hpp"
+#include "Sprite.hpp"
+#include "Text.hpp"
 #include "Matrix.hpp"
 
 #include <cstdint>
@@ -46,7 +48,15 @@ namespace sdf {
 		static void clear(const Vec4f& color = Vec4f(0.0f));
 
 		static void drawQuad(const Mat4f& transform, const Vec4f& color);
-		static void drawQuad(const Mat4f& transform, const std::shared_ptr<Texture>& texture, const Vec4f& color = Vec4f(1.0f));
+		static void drawQuad(
+			const Mat4f& transform,
+			const std::shared_ptr<Texture>& texture,
+			const Vec4f& color = Vec4f(1.0f),
+			const sdf::Vec4f* textureCoordinates = nullptr
+		);
+
+		static void drawSprite(const Sprite& sprite);
+		static void drawText(const Text& text);
 
 		static void flush();
 
@@ -62,7 +72,7 @@ namespace sdf {
 		static const RendererStatistics getStatistics() { return statistics; }
 
 	private:
-		static void drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID);
+		static void drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID, const sdf::Vec4f* textureCoordinates = nullptr);
 
 	private:
 		static std::stack<std::shared_ptr<Shader>> shaders;
