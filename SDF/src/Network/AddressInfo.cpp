@@ -7,6 +7,7 @@
 */
 
 #include <PCH.hpp>
+#include <SDF/Network/Network.hpp>
 #include <SDF/Network/AddressInfo.hpp>
 
 #include "../Core/WinError.hpp"
@@ -23,6 +24,8 @@ namespace sdf {
     }
 
     AddressInfo::AddressInfo(const std::string& address, const std::string& port) {
+
+        SDF_REQUIRE_NETWORK_INIT(_initHelper);
 
         const char* nodeName = address.c_str();
         const char* serviceName = port.c_str();

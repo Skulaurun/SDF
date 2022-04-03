@@ -12,4 +12,21 @@ namespace sdf {
 
     void initNetwork();
 
+    /*
+        Just a friendly helper
+        for SDF Network abstraction
+    */
+    struct NetworkInitHelper {
+        NetworkInitHelper() {
+            initNetwork();
+        }
+    };
+
 }
+
+/*
+    This should be part of the private interface,
+    but this header seemed kind of empty...
+*/
+#define SDF_REQUIRE_NETWORK_INIT(variable) \
+    static NetworkInitHelper variable = {};

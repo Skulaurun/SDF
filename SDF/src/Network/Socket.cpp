@@ -8,6 +8,7 @@
 
 #include <PCH.hpp>
 #include <SDF/Network/Socket.hpp>
+#include <SDF/Network/Network.hpp>
 
 #include "Core/WinError.hpp"
 
@@ -27,6 +28,8 @@ namespace sdf {
         : socket(socket) {}
 
     Socket::Socket(const NetworkProtocol protocol) {
+
+        SDF_REQUIRE_NETWORK_INIT(_initHelper);
 
         int32_t socketType = -1;
         switch (protocol) {
