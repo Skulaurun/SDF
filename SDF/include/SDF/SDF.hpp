@@ -56,6 +56,9 @@
 #include "Graphics/OpenGL/Shader.hpp"
 #include "Graphics/OpenGL/Texture.hpp"
 
+#include "Graphics/Sprite.hpp"
+#include "Graphics/Text.hpp"
+
 #include "Graphics/Camera2D.hpp"
 #include "Graphics/Transform.hpp"
 #include "Graphics/Renderer.hpp"
@@ -66,3 +69,5 @@
 
 #include "Network/AddressInfo.hpp"
 #include "Network/Socket.hpp"
+
+#include "Network/ByteStream.hpp"
