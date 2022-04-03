@@ -197,8 +197,8 @@ namespace sdf {
             vertexPtr++;
         }
 
-        indexCount += 6;
-        statistics.quadCount += 1;
+        indexCount += INDICES_PER_QUAD;
+        statistics.quadCount++;
 
     }
 
@@ -281,7 +281,7 @@ namespace sdf {
 
         glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, (const void*)0);
 
-        statistics.batchCount += 1;
+        statistics.batchCount++;
         vertexPtr = vertices.get();
         textureIndex = 1;
         indexCount = 0;

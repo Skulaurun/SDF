@@ -30,6 +30,10 @@ namespace sdf {
 
     class Renderer {
 
+    private:
+        constexpr static auto VERTICES_PER_QUAD = 4;
+        constexpr static auto INDICES_PER_QUAD = 6;
+
     public:
         static void init();
 
@@ -61,8 +65,8 @@ namespace sdf {
             uint32_t quadCount;
             uint32_t batchCount;
 
-            uint32_t getVertexCount() const { return quadCount * 4; }
-            uint32_t getIndexCount() const { return quadCount * 6; }
+            uint32_t getVertexCount() const { return quadCount * VERTICES_PER_QUAD; }
+            uint32_t getIndexCount() const { return quadCount * INDICES_PER_QUAD; }
 
             std::string asString() const {
                 return "Batches: "  + std::to_string(batchCount)        + ", "
