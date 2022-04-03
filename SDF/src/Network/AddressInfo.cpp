@@ -9,6 +9,8 @@
 #include <PCH.hpp>
 #include <SDF/Network/AddressInfo.hpp>
 
+#include "../Core/WinError.hpp"
+
 namespace sdf {
 
     static constexpr AddressFamily toAddressFamily(const int32_t type) {
@@ -24,10 +26,8 @@ namespace sdf {
 
         const char* nodeName = address.c_str();
         const char* serviceName = port.c_str();
-        
-        if (::getaddrinfo(nodeName, serviceName, NULL, &addressInfo) != 0) {
-            // Error
-        }
+
+        WSA_ASSERT(::getaddrinfo(nodeName, serviceName, NULL, &addressInfo) == 0);
 
         this->port = ntohs(SS_PORT(addressInfo->ai_addr));
         for (addrinfo* ptr = addressInfo; ptr != NULL; ptr = ptr->ai_next) {
@@ -35,9 +35,7 @@ namespace sdf {
             AddressFamily family = toAddressFamily(ptr->ai_family);
         
             std::string address(NI_MAXHOST, '\0');
-            if (getnameinfo(ptr->ai_addr, ptr->ai_addrlen, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0) {
-                // error
-            }
+            WSA_ASSERT(getnameinfo(ptr->ai_addr, ptr->ai_addrlen, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0);
 
             addressList.push_back({ family, address, ptr->ai_addr });
         
