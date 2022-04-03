@@ -17,28 +17,16 @@
 #include "Matrix.hpp"
 
 #include <cstdint>
+#include <string>
 #include <stack>
 
 namespace sdf {
 
-    // APIInfo
-
-    struct Vertex {
-        Vec2f position;
-        Vec4f color;
-        Vec2f textureCoordinate;
-        float samplerID;
-    };
-
-    struct RendererStatistics {
-
-        uint32_t batchCount;
-        uint32_t quadCount;
-
-        uint32_t getVertexCount() const { return quadCount * 4; }
-        uint32_t getIndexCount() const { return quadCount * 6; }
-
-    };
+    /*
+        TODO: Add API info utility functions,
+        e.g. OpenGL version (GL_VERSION), renderer (GL_RENDERER), vendor (GL_VENDOR)
+        and GLSL version (GL_SHADING_LANGUAGE_VERSION)
+    */
 
     class Renderer {
 
@@ -68,8 +56,29 @@ namespace sdf {
 
         static void setViewport(const Vec2i& position, const Vec2u& size);
 
-        static const void resetStatistics() { statistics = { 0, 0 }; }
-        static const RendererStatistics getStatistics() { return statistics; }
+        struct Statistics {
+
+            uint32_t quadCount;
+            uint32_t batchCount;
+
+            uint32_t getVertexCount() const { return quadCount * 4; }
+            uint32_t getIndexCount() const { return quadCount * 6; }
+
+            std::string asString() const {
+                return "Batches: "  + std::to_string(batchCount)        + ", "
+                       "Quads: "    + std::to_string(quadCount)         + ", "
+                       "Vertices: " + std::to_string(getVertexCount())  + ", "
+                       "Indices: "  + std::to_string(getIndexCount());
+            }
+
+        };
+
+        /*
+            The statistics are cleared automatically
+            during a call to sdf::Renderer:clear()
+        */
+        static void resetStatistics() { statistics = { 0, 0 }; }
+        static const Statistics getStatistics() { return statistics; }
 
     private:
         static void drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID, const sdf::Vec4f* textureCoordinates = nullptr);
@@ -78,7 +87,7 @@ namespace sdf {
         static std::stack<std::shared_ptr<Shader>> shaders;
         static std::stack<std::shared_ptr<Camera2D>> cameras;
         
-        static RendererStatistics statistics;
+        static Statistics statistics;
 
     };
 

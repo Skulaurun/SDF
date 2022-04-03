@@ -58,7 +58,18 @@ constexpr static const char* DEFAULT_FRAGMENT_SHADER = "#version 430 core\n"
 
 namespace sdf {
 
-    RendererStatistics Renderer::statistics = { 0, 0 };
+    struct Vertex {
+
+        Vec2f position;
+        Vec4f color;
+        Vec2f textureCoordinate;
+        float samplerID;
+
+        Vertex() : samplerID(0.0f) {}
+
+    };
+
+    Renderer::Statistics Renderer::statistics = { 0, 0 };
 
     static uint32_t indexCount = 0;
 
@@ -142,6 +153,7 @@ namespace sdf {
     void Renderer::clear(const Vec4f& color) {
         glClearColor(color.x, color.y, color.z, color.w);
         glClear(GL_COLOR_BUFFER_BIT);
+        resetStatistics();
     }
 
     template<typename T>
