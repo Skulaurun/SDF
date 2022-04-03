@@ -220,7 +220,10 @@ namespace sdf {
     }
 
     void Window::setTitle(const std::wstring& title) {
-        SetWindowText(hWindow, title.c_str());
+        SetWindowTextW(hWindow, title.c_str());
+    }
+    void Window::setTitle(const std::string& title) {
+        SetWindowTextA(hWindow, title.c_str());
     }
 
     bool Window::makeContextCurrent() {
