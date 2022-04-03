@@ -43,7 +43,7 @@ namespace sdf {
     class Renderer {
 
     public:
-        static bool init();
+        static void init();
 
         static void clear(const Vec4f& color = Vec4f(0.0f));
 

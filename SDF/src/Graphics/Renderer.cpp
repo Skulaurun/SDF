@@ -76,9 +76,9 @@ namespace sdf {
     static std::shared_ptr<VertexBuffer> vertexBuffer = nullptr;
     static std::shared_ptr<IndexBuffer> indexBuffer = nullptr;
 
-    bool Renderer::init() {
+    void Renderer::init() {
 
-        if (vertexArray) { return false; }
+        if (vertexArray) { return; }
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -136,8 +136,6 @@ namespace sdf {
         vertexArray->addVertexBuffer(vertexBuffer);
 
         delete[] indices;
-
-        return true;
 
     }
 
