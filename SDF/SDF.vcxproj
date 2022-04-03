@@ -325,6 +325,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\SDF\Core\Exception.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Font.hpp" />
     <ClInclude Include="include\SDF\Graphics\Image.hpp" />
     <ClInclude Include="include\SDF\Graphics\Math.hpp" />
     <ClInclude Include="include\SDF\Graphics\Matrix.hpp" />
@@ -338,6 +339,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClInclude Include="include\SDF\Graphics\Camera2D.hpp" />
     <ClInclude Include="include\SDF\Graphics\Renderer.hpp" />
     <ClInclude Include="include\SDF\Graphics\RendererObject.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Text.hpp" />
     <ClInclude Include="include\SDF\Graphics\Transform.hpp" />
     <ClInclude Include="include\SDF\Network\AddressInfo.hpp" />
     <ClInclude Include="include\SDF\Network\ByteStream.hpp" />
@@ -356,11 +358,13 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClInclude Include="src\Core\WinError.hpp" />
     <ClInclude Include="src\Graphics\OpenGL\OpenGLEnum.hpp" />
     <ClInclude Include="src\Graphics\OpenGL\OpenGL.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Sprite.hpp" />
     <ClInclude Include="src\PCH.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\WGL.cpp" />
     <ClCompile Include="src\Graphics\Camera2D.cpp" />
+    <ClCompile Include="src\Graphics\Font.cpp" />
     <ClCompile Include="src\Graphics\Image.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\Buffer.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\Shader.cpp" />
@@ -374,6 +378,8 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClCompile Include="src\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Graphics\Sprite.cpp" />
+    <ClCompile Include="src\Graphics\Text.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\Network\AddressInfo.cpp" />
     <ClCompile Include="src\Network\ByteStream.cpp" />
