@@ -11,6 +11,12 @@
 #include <cstdint>
 #include <functional>
 
+#define SDF_BIND_EVENT(fn, in) \
+    std::bind(&fn, in, std::placeholders::_1)
+
+#define SDF_THIS_BIND_EVENT(fn) \
+    std::bind(&fn, this, std::placeholders::_1)
+
 namespace sdf {
 
     class Event {
