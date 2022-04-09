@@ -19,15 +19,20 @@ namespace sdf {
     public:
         Text(const std::wstring& text, const std::shared_ptr<Font>& font = nullptr);
 
+        void appendContent(const std::wstring& text);
+
+        void setContent(const std::wstring& text) { this->text = text; updateText(); }
         void setPosition(const sdf::Vec2f& position) { this->position = position; updateTransform(); }
         void setFontSize(const float size) { this->fontSize = size; updateTransform(); }
         void setFontColor(const Vec4f& color) { this->fontColor = color; updateColor(); }
 
+        std::wstring getContent() { return text; }
         Vec4f getColor() const { return fontColor; }
 
         const std::vector<Sprite>& getSprites() const { return sprites; }
 
     private:
+        void updateText();
         void updateColor();
         void updateTransform();
 

@@ -16,12 +16,23 @@ namespace sdf {
     Text::Text(const std::wstring& text, const std::shared_ptr<Font>& font)
         : text(text), font(font), fontColor(1.0f) {
 
+        updateText();
+
+    }
+
+    void Text::appendContent(const std::wstring& text) {
+
         for (std::size_t i = 0; i < text.size(); i++) {
             sprites.push_back(font->getSprite(text[i]));
         }
 
         updateTransform();
 
+    }
+
+    void Text::updateText() {
+        sprites.clear();
+        appendContent(text);
     }
 
     void Text::updateColor() {
