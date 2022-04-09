@@ -25,6 +25,7 @@ namespace sdf {
             WindowDescriptor(const wchar_t* className) : windowClass({}) {
                 windowClass.lpszClassName = (LPCWSTR)className;
                 windowClass.lpfnWndProc = _windowProcedure;
+                windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
                 RegisterClass(&windowClass);
             }
 
