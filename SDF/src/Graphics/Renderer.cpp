@@ -156,26 +156,6 @@ namespace sdf {
         resetStatistics();
     }
 
-    template<typename T>
-    Vector4D<T> operator*(const Matrix4x4<T>& matrix, const Vector4D<T> vector) {
-        return Vector4D<T>(
-            matrix[0][0] * vector.x + matrix[1][0] * vector.y + matrix[2][0] * vector.z + matrix[3][0] * vector.w,
-            matrix[0][1] * vector.x + matrix[1][1] * vector.y + matrix[2][1] * vector.z + matrix[3][1] * vector.w,
-            matrix[0][2] * vector.x + matrix[1][2] * vector.y + matrix[2][2] * vector.z + matrix[3][2] * vector.w,
-            matrix[0][3] * vector.x + matrix[1][3] * vector.y + matrix[2][3] * vector.z + matrix[3][3] * vector.w
-        );
-    }
-
-    template<typename T>
-    Vector4D<T> operator*(const Vector4D<T>& vector1, const Vector4D<T> vector2) {
-        return Vector4D<T>(
-            vector1.x * vector2.x,
-            vector1.y * vector2.y,
-            vector1.z * vector2.z,
-            vector1.w * vector2.w
-        );
-    }
-
     void Renderer::drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID, const sdf::Vec4f* textureCoordinates) {
 
         constexpr static Vec4f quad[] = {
