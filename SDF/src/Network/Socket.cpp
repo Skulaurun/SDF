@@ -84,11 +84,11 @@ namespace sdf {
         WSA_ASSERT(::listen(socket, SOMAXCONN) != SOCKET_ERROR);
     }
 
-    void Socket::send(const char* buffer, const std::size_t length) const {
+    void Socket::send(const char* buffer, const int length) const {
         WSA_ASSERT(::send(socket, buffer, length, 0) != SOCKET_ERROR);
     }
 
-    bool Socket::receive(char* buffer, const std::size_t length) const {
+    bool Socket::receive(char* buffer, const int length) const {
 
         int32_t result = ::recv(socket, buffer, length, 0);
         if (result == 0) {

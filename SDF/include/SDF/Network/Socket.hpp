@@ -44,8 +44,8 @@ namespace sdf {
         void connect(const sdf::AddressInfo& info);
         void listen();
 
-        void send(const char* buffer, const std::size_t length) const;
-        bool receive(char* buffer, const std::size_t length) const;
+        void send(const char* buffer, const int length) const;
+        bool receive(char* buffer, const int length) const;
 
         void close();
 
