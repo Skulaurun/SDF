@@ -12,7 +12,23 @@
 
 #include <cmath>
 
+// General math for 2D and 3D
+
 namespace sdf {
+
+    template<typename T> inline T sin(const T& x) { return std::sin(x); }
+    template<typename T> inline T cos(const T& x) { return std::cos(x); }
+    template<typename T> inline T tan(const T& x) { return std::tan(x); }
+    template<typename T> inline T cot(const T& x) { return 1.0 / std::tan(x); }
+    template<typename T> inline T pow(const T& x, const T& y) { return std::pow(x, y); }
+    template<typename T> inline T sqrt(const T& x) { return std::sqrt(x); }
+    
+    template<> inline float sin(const float& x) { return std::sinf(x); }
+    template<> inline float cos(const float& x) { return std::cosf(x); }
+    template<> inline float tan(const float& x) { return std::tanf(x); }
+    template<> inline float cot(const float& x) { return 1.0f / std::tanf(x); }
+    template<> inline float pow(const float& x, const float& y) { return std::powf(x, y); }
+    template<> inline float sqrt(const float& x) { return std::sqrtf(x); }
 
     template<typename T>
     Matrix4x4<T> translate(const Vector3D<T>& v) {
@@ -37,10 +53,24 @@ namespace sdf {
     template<typename T>
     Matrix4x4<T> rotate(const T a, const Vector3D<T>& r) {
         return Matrix4x4<T>(
-            std::cos(a) + std::pow(r.x, 2) * (1 - std::cos(a)), r.y * r.x * (1 - std::cos(a)) + r.z * std::sin(a), r.z * r.x * (1 - std::cos(a)) - r.y * std::sin(a), 0,
-            r.x * r.y * (1 - std::cos(a)) - r.z * std::sin(a), std::cos(a) + std::pow(r.y, 2) * (1 - std::cos(a)), r.z * r.y * (1 - std::cos(a)) + r.x * std::sin(a), 0,
-            r.x * r.z * (1 - std::cos(a)) + r.y * std::sin(a), r.y * r.z * (1 - std::cos(a)) - r.x * std::sin(a), std::cos(a) + std::pow(r.z, 2) * (1 - std::cos(a)), 0,
-            0, 0, 0, 1
+
+            cos(a) + pow(r.x, T(2)) * (T(1) - cos(a)),
+            r.y * r.x * (T(1) - cos(a)) + r.z * sin(a),
+            r.z * r.x * (T(1) - cos(a)) - r.y * sin(a),
+            T(0),
+
+            r.x * r.y * (T(1) - cos(a)) - r.z * sin(a),
+            cos(a) + pow(r.y, T(2)) * (T(1) - cos(a)),
+            r.z * r.y * (T(1) - cos(a)) + r.x * sin(a),
+            T(0),
+
+            r.x * r.z * (T(1) - cos(a)) + r.y * sin(a),
+            r.y * r.z * (T(1) - cos(a)) - r.x * sin(a),
+            cos(a) + pow(r.z, T(2)) * (T(1) - cos(a)),
+            T(0),
+
+            T(0), T(0), T(0), T(1)
+
         );
     }
 
@@ -66,6 +96,16 @@ namespace sdf {
             0, 2 / (top - bottom), 0, 0,
             0, 0, -2 / (far - near), 0,
             -(right + left) / (right - left), -(top + bottom) / (top - bottom), -(far + near) / (far - near), 1
+        );
+    }
+
+    template<typename T>
+    Vector4D<T> operator*(const Matrix4x4<T>& matrix, const Vector4D<T> vector) {
+        return Vector4D<T>(
+            matrix[0][0] * vector.x + matrix[1][0] * vector.y + matrix[2][0] * vector.z + matrix[3][0] * vector.w,
+            matrix[0][1] * vector.x + matrix[1][1] * vector.y + matrix[2][1] * vector.z + matrix[3][1] * vector.w,
+            matrix[0][2] * vector.x + matrix[1][2] * vector.y + matrix[2][2] * vector.z + matrix[3][2] * vector.w,
+            matrix[0][3] * vector.x + matrix[1][3] * vector.y + matrix[2][3] * vector.z + matrix[3][3] * vector.w
         );
     }
 
