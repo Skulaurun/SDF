@@ -12,21 +12,21 @@
 
 namespace sdf {
 
-    class Camera2D {
+    class Camera {
 
     public:
-        Camera2D(const float left, const float right, const float bottom, const float top);
+        Camera(const float left, const float right, const float bottom, const float top);
 
         void setProjection(const float left, const float right, const float bottom, const float top);
 
         void setZoom(const float zoom) { this->zoom = zoom; recalculateMatrix(); }
         void setRotation(const float rotation) { this->rotation = rotation; recalculateMatrix(); }
-        void setPosition(const Vec3f& position) { this->position = position; recalculateMatrix(); }
+        void setPosition(const Vec2f& position) { this->position = position; recalculateMatrix(); }
         void setProjectionMatrix(const Mat4f& projection) { this->projectionMatrix = projection; recalculateMatrix(); }
 
         float getZoom() const { return zoom; }
         float getRotation() const { return rotation; }
-        Vec3f getPosition() const { return position; }
+        Vec2f getPosition() const { return position; }
 
         const Mat4f& getViewMatrix() const { return viewMatrix; }
         const Mat4f& getProjectionMatrix() const { return projectionMatrix; }
@@ -38,7 +38,7 @@ namespace sdf {
     private:
         float zoom;
         float rotation;
-        Vec3f position;
+        Vec2f position;
         Mat4f viewMatrix;
         Mat4f projectionMatrix;
         Mat4f viewProjectionMatrix;

@@ -59,7 +59,7 @@
 #include "Graphics/Sprite.hpp"
 #include "Graphics/Text.hpp"
 
-#include "Graphics/Camera2D.hpp"
+#include "Graphics/Camera.hpp"
 #include "Graphics/Transform.hpp"
 #include "Graphics/Renderer.hpp"
 

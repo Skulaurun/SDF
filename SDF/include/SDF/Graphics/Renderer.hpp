@@ -11,7 +11,7 @@
 #include "../Core/Vector.hpp"
 #include "OpenGL/Shader.hpp"
 #include "OpenGL/Texture.hpp"
-#include "Camera2D.hpp"
+#include "Camera.hpp"
 #include "Sprite.hpp"
 #include "Text.hpp"
 #include "Matrix.hpp"
@@ -55,7 +55,7 @@ namespace sdf {
         static void beginShader(const std::shared_ptr<Shader>& shader);
         static void endShader();
 
-        static void beginCamera(const std::shared_ptr<Camera2D>& camera);
+        static void beginCamera(const std::shared_ptr<Camera>& camera);
         static void endCamera();
 
         static void setViewport(const Vec2i& position, const Vec2u& size);
@@ -89,7 +89,7 @@ namespace sdf {
 
     private:
         static std::stack<std::shared_ptr<Shader>> shaders;
-        static std::stack<std::shared_ptr<Camera2D>> cameras;
+        static std::stack<std::shared_ptr<Camera>> cameras;
         
         static Statistics statistics;
 

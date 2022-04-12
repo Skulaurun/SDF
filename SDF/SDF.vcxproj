@@ -336,7 +336,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClInclude Include="include\SDF\Graphics\OpenGL\Texture.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\VertexArray.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\VertexBuffer.hpp" />
-    <ClInclude Include="include\SDF\Graphics\Camera2D.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Camera.hpp" />
     <ClInclude Include="include\SDF\Graphics\Renderer.hpp" />
     <ClInclude Include="include\SDF\Graphics\RendererObject.hpp" />
     <ClInclude Include="include\SDF\Graphics\Text.hpp" />
@@ -363,7 +363,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\WGL.cpp" />
-    <ClCompile Include="src\Graphics\Camera2D.cpp" />
+    <ClCompile Include="src\Graphics\Camera.cpp" />
     <ClCompile Include="src\Graphics\Font.cpp" />
     <ClCompile Include="src\Graphics\Image.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\Buffer.cpp" />

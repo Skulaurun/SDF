@@ -81,7 +81,7 @@ namespace sdf {
     static std::array<std::shared_ptr<Texture>, MAX_TEXTURE_COUNT> textures = {};
 
     std::stack<std::shared_ptr<Shader>> Renderer::shaders = {};
-    std::stack<std::shared_ptr<Camera2D>> Renderer::cameras = {};
+    std::stack<std::shared_ptr<Camera>> Renderer::cameras = {};
 
     static std::unique_ptr<VertexArray> vertexArray = nullptr;
     static std::shared_ptr<VertexBuffer> vertexBuffer = nullptr;
@@ -106,7 +106,7 @@ namespace sdf {
         shaders.push(shader);
         shader->bind();
 
-        std::shared_ptr<Camera2D> camera = std::make_shared<Camera2D>(0.0f, 1.0f, 1.0f, 0.0f);
+        std::shared_ptr<Camera> camera = std::make_shared<Camera>(0.0f, 1.0f, 1.0f, 0.0f);
         camera->setProjectionMatrix(Mat4f(1.0f));
         cameras.push(camera);
 
@@ -271,7 +271,7 @@ namespace sdf {
     void Renderer::beginShader(const std::shared_ptr<Shader>& shader) { shaders.push(shader); }
     void Renderer::endShader() { shaders.pop(); }
 
-    void Renderer::beginCamera(const std::shared_ptr<Camera2D>& camera) { cameras.push(camera); }
+    void Renderer::beginCamera(const std::shared_ptr<Camera>& camera) { cameras.push(camera); }
     void Renderer::endCamera() { cameras.pop(); }
 
     void Renderer::setViewport(const Vec2i& position, const Vec2u& size) {
