@@ -38,7 +38,7 @@ namespace sdf {
             AddressFamily family = toAddressFamily(ptr->ai_family);
         
             std::string address(NI_MAXHOST, '\0');
-            WSA_ASSERT(getnameinfo(ptr->ai_addr, ptr->ai_addrlen, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0);
+            WSA_ASSERT(getnameinfo(ptr->ai_addr, (socklen_t)ptr->ai_addrlen, address.data(), (DWORD)address.size(), NULL, 0, NI_NUMERICHOST) == 0);
 
             addressList.push_back({ family, address, ptr->ai_addr });
         
