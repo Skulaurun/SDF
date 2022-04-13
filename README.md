@@ -134,6 +134,14 @@ You probably want to use the configurations `Debug` or `Release`, not the `...De
 
 The output files are written to `$(SolutionDir)/build` folder.
 
+## Projects that inspired me
+
+- [SFML](https://github.com/SFML/SFML)
+- [GLFW](https://github.com/glfw/glfw)
+- [TheCherno/Hazel](https://github.com/TheCherno/Hazel)
+
+Number #1 OpenGL learning resource https://learnopengl.com/.
+
 ## License
 
 The project is licensed under the MIT License. See [LICENSE](https://github.com/Skulaurun/SDF/blob/v1.0.0/LICENSE) for details.
