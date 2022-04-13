@@ -136,4 +136,4 @@ The output files are written to `$(SolutionDir)/build` folder.
 
 ## License
 
-The project is licensed under the MIT License. See [LICENCE](https://github.com/Skulaurun/SDF/blob/v1.0.0/LICENSE) for details.
+The project is licensed under the MIT License. See [LICENSE](https://github.com/Skulaurun/SDF/blob/v1.0.0/LICENSE) for details.
