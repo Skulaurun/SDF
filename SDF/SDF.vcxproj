@@ -329,7 +329,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClInclude Include="include\SDF\Graphics\Image.hpp" />
     <ClInclude Include="include\SDF\Graphics\Math.hpp" />
     <ClInclude Include="include\SDF\Graphics\Matrix.hpp" />
-    <ClInclude Include="include\SDF\Core\Vector.hpp" />
+    <ClInclude Include="include\SDF\Graphics\Vector.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\Buffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\IndexBuffer.hpp" />
     <ClInclude Include="include\SDF\Graphics\OpenGL\Shader.hpp" />

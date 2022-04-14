@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "../Core/Vector.hpp"
+#include "Vector.hpp"
 #include "OpenGL/Shader.hpp"
 #include "OpenGL/Texture.hpp"
 #include "Camera.hpp"

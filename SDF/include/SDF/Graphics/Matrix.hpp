@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "../Core/Vector.hpp"
+#include "Vector.hpp"
 
 namespace sdf {
 

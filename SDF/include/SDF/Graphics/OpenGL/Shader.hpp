@@ -10,7 +10,7 @@
 
 #include <SDF/Graphics/RendererObject.hpp>
 
-#include <SDF/Core/Vector.hpp>
+#include <SDF/Graphics/Vector.hpp>
 #include <SDF/Graphics/Matrix.hpp>
 
 #include <cstdint>

@@ -12,7 +12,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "../Core/Vector.hpp"
+#include "Vector.hpp"
 #include "OpenGL/Texture.hpp"
 
 #include "Sprite.hpp"
