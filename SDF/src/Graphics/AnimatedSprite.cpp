@@ -28,8 +28,8 @@ namespace sdf {
 
     void AnimatedSprite::updateProperties() {
 
-        rowCount = std::floorf(getTexture()->getHeight() / frameSize.y);
-        columnCount = std::floorf(getTexture()->getWidth() / frameSize.x);
+        rowCount = (std::size_t)std::floorf(getTexture()->getHeight() / frameSize.y);
+        columnCount = (std::size_t)std::floorf(getTexture()->getWidth() / frameSize.x);
 
         getTransform().setSize(frameSize);
 
