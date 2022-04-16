@@ -13,7 +13,14 @@
 namespace sdf {
 
     AnimatedSprite::AnimatedSprite(const Sprite& sprite, const Vec2f& frameSize)
-        : Sprite(sprite), frameSize(frameSize), rowCount(0), columnCount(0), animations({}) {
+        : Sprite(sprite),
+          frameSize(frameSize),
+          rowCount(0),
+          columnCount(0),
+          frameCounter(0),
+          lastFrame(-1.0f),
+          animations({}),
+          isPlaying(false) {
         updateProperties();
     }
     AnimatedSprite::AnimatedSprite(const std::shared_ptr<Texture>& texture, const Vec2f& frameSize)
@@ -28,7 +35,9 @@ namespace sdf {
 
     }
 
-    void AnimatedSprite::setAnimation(const std::string& name, const std::size_t rowIndex, const std::size_t frameCount, const float speed) {
+    void AnimatedSprite::setAnimation(const std::size_t rowIndex, const std::string& name, const float fps, std::size_t frameCount) {
+
+        frameCount = frameCount == 0 ? columnCount : frameCount;
 
         if (rowIndex >= rowCount) {
             throw std::invalid_argument("Row count is outside of the texture's bounds.");
@@ -37,37 +46,59 @@ namespace sdf {
             throw std::invalid_argument("Frame count is outside of the texture's bounds.");
         }
 
-        animations[name] = { rowIndex, frameCount, speed };
+        animations[name] = { rowIndex, frameCount, fps };
 
     }
 
-    float deltaCounter = 0.0f;
+    void AnimatedSprite::play(const std::string& name) {
+        isOnce = false;
+        isPlaying = true;
+        currentAnimation = name;
+    }
+    void AnimatedSprite::playOnce(const std::string& name) {
+        lastFrame = -1.0f;
+        deltaCounter = 0.0f;
+        currentAnimation = name;
+        isPlaying = isOnce = true;
+        frameCounter = animations[currentAnimation].frameCount;
+    }
 
     void AnimatedSprite::update(const float deltaTime) {
 
         deltaCounter += deltaTime;
 
-        if (currentAnimation == "") {
-            return;
+        if (isPlaying && currentAnimation != "") {
+
+            SpriteAnimation& animation = animations[currentAnimation];
+            std::size_t rowIndex = animation.rowIndex;
+            float currentFrame = ((std::size_t)std::floorf((animation.fps / 1000.0f) * deltaCounter)) % animation.frameCount;
+
+            sdf::Vec4f region = {
+                currentFrame * frameSize.x,
+                rowIndex * frameSize.y,
+                currentFrame * frameSize.x + frameSize.x,
+                rowIndex * frameSize.y + frameSize.y
+            };
+
+            setRegion(region);
+
+            if (isOnce) {
+                if (currentFrame != lastFrame) {
+                    if (frameCounter - 1 > 0) {
+                        frameCounter--;
+                    } else {
+                        isPlaying = false;
+                    }
+                }
+            }
+
+            lastFrame = currentFrame;
+
         }
-
-        SpriteAnimation& animation = animations[currentAnimation];
-        std::size_t rowIndex = animation.rowIndex;
-        float currentFrame = ((std::size_t)std::floorf(animation.speed * deltaCounter)) % animation.frameCount;
-
-        sdf::Vec4f region = {
-            currentFrame * frameSize.x,
-            rowIndex * frameSize.y,
-            currentFrame * frameSize.x + frameSize.x,
-            rowIndex * frameSize.y + frameSize.y
-        };
-
-        setRegion(region);
 
     }
 
-    float lastTime = 0.0f;
-
+    static float lastTime = 0.0f;
     void AnimatedSprite::update() {
 
         float currentTime = Clock::getNow().asMilliseconds();
