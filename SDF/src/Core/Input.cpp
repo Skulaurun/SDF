@@ -9,8 +9,36 @@
 #include <PCH.hpp>
 
 #include <SDF/Core/Input.hpp>
+#include <SDF/Core/Window.hpp>
+
+#include "WinError.hpp"
 
 namespace sdf {
+
+    MousePosition& MousePosition::relativeTo(const Window& window) {
+        POINT position = { x, y };
+        SYS_ASSERT(
+            ScreenToClient(window.getNativeWindow(), &position) != 0
+        );
+        x = position.x;
+        y = position.y;
+        return *this;
+    }
+
+    MousePosition& MousePosition::relativeAndClampTo(const Window& window) {
+        relativeTo(window);
+        x = std::clamp(x, int32_t(0), (int32_t)window.getWidth());
+        y = std::clamp(y, int32_t(0), (int32_t)window.getHeight());
+        return *this;
+    }
+
+    MousePosition Input::getMousePosition() {
+        POINT position = {};
+        SYS_ASSERT(
+            GetCursorPos(&position) != 0
+        );
+        return MousePosition(position.x, position.y);
+    }
     
     bool Input::isButtonPressed(const Button button) {
         return (GetAsyncKeyState(toNativeButton(button)) & 0x8000) != 0;

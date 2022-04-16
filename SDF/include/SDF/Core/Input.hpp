@@ -12,6 +12,23 @@
 
 namespace sdf {
 
+    class Window;
+
+    struct MousePosition {
+
+    public:
+        MousePosition(const int32_t x, const int32_t y)
+            : x(x), y(y) {}
+
+        MousePosition& relativeTo(const Window& window);
+        MousePosition& relativeAndClampTo(const Window& window);
+
+    public:
+        int32_t x;
+        int32_t y;
+
+    };
+
     class Input {
 
     public:
@@ -86,6 +103,8 @@ namespace sdf {
         };
 
     public:
+        static MousePosition getMousePosition();
+
         static bool isKeyPressed(const Key key);
         static bool isButtonPressed(const Button button);
 
