@@ -13,15 +13,23 @@
 
 #include <string>
 
+#define SYS_THROW() { \
+    WinError error = WinError::getLastError(); \
+    throw SystemException(error.message, error.code); \
+}
+
 #define WSA_THROW() { \
     WinError error = WinError::getLastWSAError(); \
     throw NetworkException(error.message, error.code); \
 }
 
-#define WSA_ASSERT(x) \
+#define WINERROR_ASSERT(x, HANDLER) \
     if (!(x)) { \
-        WSA_THROW(); \
+        HANDLER(); \
     }
+
+#define SYS_ASSERT(x) WINERROR_ASSERT(x, SYS_THROW)
+#define WSA_ASSERT(x) WINERROR_ASSERT(x, WSA_THROW)
 
 #define COM_CALL(hResult) \
     if (FAILED(hResult)) { \
