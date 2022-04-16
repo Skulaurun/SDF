@@ -9,8 +9,6 @@
 #include <PCH.hpp>
 #include <SDF/Graphics/Font.hpp>
 
-#include <iostream>
-
 namespace sdf {
 
     Font::Font(const std::wstring& characters, const Vec2f& size, const std::shared_ptr<Texture>& texture)
