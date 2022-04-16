@@ -7,11 +7,7 @@
 */
 
 #include <PCH.hpp>
-
 #include <SDF/Graphics/OpenGL/Shader.hpp>
-
-// temp
-#include <iostream>
 
 #include "OpenGL.hpp"
 
@@ -38,9 +34,8 @@ namespace sdf {
 			const char* data = source.data.c_str();
 			glShaderSource(shader, 1, &data, NULL);
 
-			if (compileShader(shader)) {
-				glAttachShader(id, shader);
-			}
+			compileShader(shader, source.type);
+			glAttachShader(id, shader);
 
 		}
 
@@ -52,7 +47,7 @@ namespace sdf {
 		glDeleteProgram(id);
 	}
 
-	bool Shader::compileShader(const uint32_t shader) const {
+	void Shader::compileShader(const uint32_t shader, const ShaderType type) const {
 
 		int32_t result;
 		glCompileShader(shader);
@@ -63,21 +58,13 @@ namespace sdf {
 			int32_t length;
 			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
 
-			std::string info;
-			info.resize(static_cast<std::string::size_type>(length - 1));
+			std::string info(static_cast<std::string::size_type>(length - 1), '\0');
 			glGetShaderInfoLog(shader, length, NULL, info.data());
+			info.erase(info.find_last_not_of(" \r\n\t\v") + 1);
 
-			//LOG_ERROR("OpenGL Shader Compiler: Failed to compile a shader:");
-
-			std::istringstream iss(info);
-			for (std::string line; std::getline(iss, line);) {
-				//LOG_ERROR("  {0}", line);
-				std::cerr << line << std::endl;
-			}
+			throw ShaderException(info, type);
 
 		}
-
-		return result == GL_TRUE;
 
 	}
 	int32_t Shader::getUniformLocation(const std::string& name) {

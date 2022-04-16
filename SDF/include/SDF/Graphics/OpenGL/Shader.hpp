@@ -8,8 +8,9 @@
 
 #pragma once
 
-#include <SDF/Graphics/RendererObject.hpp>
+#include <SDF/Core/Exception.hpp>
 
+#include <SDF/Graphics/RendererObject.hpp>
 #include <SDF/Graphics/Vector.hpp>
 #include <SDF/Graphics/Matrix.hpp>
 
@@ -50,12 +51,25 @@ namespace sdf {
 		void setUniform(const std::string& name, const Mat4f& value);
 
 	private:
-		bool compileShader(const uint32_t shader) const;
 		int32_t getUniformLocation(const std::string& name);
+		void compileShader(const uint32_t shader, const ShaderType type) const;
 
 	private:
 		std::unordered_map<std::string, int32_t> uniformLocationCache;
 
 	};
+
+	class ShaderException : public Exception {
+
+    public:
+        explicit ShaderException(const std::string& message, const ShaderType type) noexcept
+            : Exception(message.c_str()), type(type) {}
+
+		virtual ShaderType shader() const { return type; }
+
+	private:
+		ShaderType type;
+
+    };
 
 }
