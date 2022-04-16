@@ -71,7 +71,12 @@ namespace sdf {
 
             SpriteAnimation& animation = animations[currentAnimation];
             std::size_t rowIndex = animation.rowIndex;
-            float currentFrame = ((std::size_t)std::floorf((animation.fps / 1000.0f) * deltaCounter)) % animation.frameCount;
+
+            float currentFrame = float(
+                ((std::size_t)std::floorf(
+                    (animation.fps / 1000.0f) * deltaCounter
+                )) % animation.frameCount
+            );
 
             sdf::Vec4f region = {
                 currentFrame * frameSize.x,
