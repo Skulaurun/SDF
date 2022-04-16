@@ -20,6 +20,7 @@
 
 #include <cmath>
 #include <memory>
+#include <algorithm>
 #include <functional>
 #include <filesystem>
 
