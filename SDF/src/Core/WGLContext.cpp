@@ -17,18 +17,9 @@
 
 #include "WGL.hpp"
 #include "WGLContext.hpp"
+#include "WinError.hpp"
 
 #pragma comment (lib, "opengl32.lib")
-
-#define SYS_THROW() { \
-    WinError error = WinError::getLastError(); \
-    throw SystemException(error.message, error.code); \
-}
-
-#define SYS_ASSERT(x) \
-    if (!(x)) { \
-        SYS_THROW(); \
-    }
 
 namespace sdf {
 
