@@ -17,6 +17,11 @@
 #define SDF_THIS_BIND_EVENT(fn) \
     std::bind(&fn, this, std::placeholders::_1)
 
+/*
+    TODO: Implement event categories!
+    As a means of passing multiple event types to one handler.
+*/
+
 namespace sdf {
 
     class Event {
