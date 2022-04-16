@@ -56,6 +56,7 @@
 #include "Graphics/OpenGL/Texture.hpp"
 
 #include "Graphics/Sprite.hpp"
+#include "Graphics/AnimatedSprite.hpp"
 #include "Graphics/Text.hpp"
 
 #include "Graphics/Camera.hpp"

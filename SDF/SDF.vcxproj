@@ -325,6 +325,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\SDF\Core\Exception.hpp" />
+    <ClInclude Include="include\SDF\Graphics\AnimatedSprite.hpp" />
     <ClInclude Include="include\SDF\Graphics\Font.hpp" />
     <ClInclude Include="include\SDF\Graphics\Image.hpp" />
     <ClInclude Include="include\SDF\Graphics\Math.hpp" />
@@ -363,6 +364,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\WGL.cpp" />
+    <ClCompile Include="src\Graphics\AnimatedSprite.cpp" />
     <ClCompile Include="src\Graphics\Camera.cpp" />
     <ClCompile Include="src\Graphics\Font.cpp" />
     <ClCompile Include="src\Graphics\Image.cpp" />
