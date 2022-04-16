@@ -101,7 +101,7 @@ namespace sdf {
     static float lastTime = 0.0f;
     void AnimatedSprite::update() {
 
-        float currentTime = Clock::getNow().asMilliseconds();
+        float currentTime = (float)Clock::getNow().asMilliseconds();
         float deltaTime = currentTime - lastTime;
         lastTime = currentTime;
 
