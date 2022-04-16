@@ -41,4 +41,10 @@ namespace sdf {
         return ClockUnit(getTime() - startTime);
     }
 
+    ClockUnit Clock::collectElapsed() {
+        ClockUnit time = getElapsed();
+        restart();
+        return time;
+    }
+
 }

@@ -36,6 +36,7 @@ namespace sdf {
 
         void restart();
         ClockUnit getElapsed() const;
+        ClockUnit collectElapsed();
 
         static ClockUnit getNow() { return ClockUnit(getTime()); }
 
