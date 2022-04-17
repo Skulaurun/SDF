@@ -45,6 +45,7 @@
 #include "Graphics/Vector.hpp"
 #include "Graphics/Matrix.hpp"
 #include "Graphics/Math.hpp"
+#include "Graphics/Color.hpp"
 
 #include "Graphics/OpenGL/Buffer.hpp"
 #include "Graphics/OpenGL/VertexBuffer.hpp"
