@@ -155,6 +155,9 @@ namespace sdf {
         glClear(GL_COLOR_BUFFER_BIT);
         resetStatistics();
     }
+    void Renderer::clear(const Vec3f& color) {
+        clear(sdf::Vec4f(color, 1.0f));
+    }
 
     void Renderer::drawQuad(const Mat4f& transform, const Vec4f& color, const float samplerID, const sdf::Vec4f* textureCoordinates) {
 
