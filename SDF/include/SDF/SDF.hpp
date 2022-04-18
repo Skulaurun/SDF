@@ -61,6 +61,7 @@
 #include "Graphics/Text.hpp"
 
 #include "Graphics/Camera.hpp"
+#include "Graphics/WindowCamera.hpp"
 #include "Graphics/Transform.hpp"
 #include "Graphics/Renderer.hpp"
 
