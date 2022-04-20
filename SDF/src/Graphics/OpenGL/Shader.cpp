@@ -44,7 +44,7 @@ namespace sdf {
 
 	}
 	Shader::~Shader() {
-		glDeleteProgram(id);
+		glDeleteProgram(*contextId());
 	}
 
 	void Shader::compileShader(const uint32_t shader, const ShaderType type) const {

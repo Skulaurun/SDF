@@ -12,21 +12,28 @@
 
 namespace sdf {
 
+	class WGLContext;
+
 	class RendererObject {
 
 	public:
-		RendererObject() : id(0) {}
-		RendererObject(uint32_t id) : id(id) {}
+		RendererObject();
+		RendererObject(uint32_t id);
 
 		virtual ~RendererObject() = default;
 
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 
-		bool operator==(const RendererObject& other) { return id == other.id; }
+		bool operator==(const RendererObject& other) { return isSameContext() && id == other.id; }
+
+	protected:
+		bool isSameContext();
+		uint32_t* contextId();
 
 	protected:
 		uint32_t id;
+		const WGLContext* context;
 
 	};
 

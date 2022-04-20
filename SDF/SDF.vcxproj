@@ -382,6 +382,7 @@ xcopy /s /y "$(ProjectDir)include" "$(SolutionDir)build\out\$(ProjectName)-$(Pla
     <ClCompile Include="src\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\OpenGL\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Graphics\RendererObject.cpp" />
     <ClCompile Include="src\Graphics\Sprite.cpp" />
     <ClCompile Include="src\Graphics\Text.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />

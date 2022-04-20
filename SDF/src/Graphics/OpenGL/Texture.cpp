@@ -53,7 +53,7 @@ namespace sdf {
             properties
         ) {}
 	Texture::~Texture() {
-		glDeleteTextures(1, &id);
+        glDeleteTextures(1, contextId());
 	}
 
     void Texture::setProperties(const TextureProperties& properties) {

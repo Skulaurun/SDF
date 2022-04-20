@@ -89,8 +89,6 @@ namespace sdf {
 
     void Renderer::init() {
 
-        if (vertexArray) { return; }
-
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

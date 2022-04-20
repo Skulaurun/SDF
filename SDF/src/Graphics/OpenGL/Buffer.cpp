@@ -31,7 +31,7 @@ namespace sdf {
 
 	template<typename TData, BufferType TBuffer>
 	Buffer<TData, TBuffer>::~Buffer() {
-		glDeleteBuffers(1, &id);
+		glDeleteBuffers(1, contextId());
 	}
 
 	template<typename TData, BufferType TBuffer>

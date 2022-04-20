@@ -19,7 +19,7 @@ namespace sdf {
 	}
 
 	VertexArray::~VertexArray() {
-		glDeleteVertexArrays(1, &id);
+		glDeleteVertexArrays(1, contextId());
 	}
 
 	void VertexArray::bind() const {
