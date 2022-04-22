@@ -34,7 +34,7 @@ int doExample03() {
 
         // Send message to the server
         const char* message = "Hello from client.";
-        socket.send(message, strlen(message));
+        socket.send(message, (int)strlen(message));
 
         // Receive message from the server
         char buffer[256] = {};
@@ -68,7 +68,7 @@ int doExample03() {
 
         // Send message to client
         const char* message = "Hello from server.";
-        client->send(message, strlen(message));
+        client->send(message, (int)strlen(message));
 
     }
 
