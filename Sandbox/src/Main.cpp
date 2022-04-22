@@ -6,127 +6,62 @@
 * SPDX-License-Identifier: MIT
 */
 
-#include <SDF/SDF.hpp>
+#include "Examples/Examples.hpp"
 
+#include <string>
 #include <iostream>
 
-void onWindowResize(const sdf::WindowResizeEvent& e) {
-    // Width and height are the new dimensions of the window
-    std::cout << "Window resized: (" << e.getWidth() << ", " << e.getHeight() << ")\n";
-}
-void onWindowMove(const sdf::WindowMoveEvent& e) {
-    // [X;Y] are the coordinates where the top left window corner was
-    // when this event got processed
-    std::cout << "Window moved: (" << e.getX() << ", " << e.getY() << ")\n";
-}
+#include <windows.h>
 
-void onMouseMoveEvent(const sdf::WindowMouseMoveEvent& e) {
-    // [X;Y] are the coordinates where mouse pointer was
-    // when this event got processed
-    std::cout << "Mouse moved: (" << e.getX() << ", " << e.getY() << ")\n";
-}
-void onMouseScrollEvent(const sdf::WindowMouseScrollEvent& e) {
-    // If vertical wheel was used, scrollX is zero
-    // If horizontal wheel was used, scrollY is zero
-    std::cout << "Mouse scrolled: (" << e.getScrollX() << ", " << e.getScrollY() << ")\n";
-}
-void onMouseButtonEvent(const sdf::WindowMouseButtonEvent& e) {
-
-    // If the button that triggered this event is pressed
-    if (e.isButtonPressed()) {
-
-        // Shift, Ctrl and Alt are commonly combined with buttons
-        // that is when these quality of life functions come in handy
-        if (e.isCtrlPressed() && e.getButton() == sdf::Input::Button::Left) {
-            std::cout << "Button-key combination! (Ctrl + Left mouse)" << std::endl;
-        }
-
-        // Decide which button was pressed
-        // and get click position in window coordinates
-        switch (e.getButton()) {
-
-        case sdf::Input::Button::Left:
-            std::cout << "Left-clicked at (" << e.getX() << ", " << e.getY() << ")" << std::endl;
-            break;
-
-        case sdf::Input::Button::Right:
-            std::cout << "Right-clicked at (" << e.getX() << ", " << e.getY() << ")" << std::endl;
-            break;
-
-        case sdf::Input::Button::Middle:
-            std::cout << "Middle-clicked at (" << e.getX() << ", " << e.getY() << ")" << std::endl;
-            break;
-
-        default:
-            std::cout << ((int32_t)e.getButton()) << " button was pressed" << std::endl;
-            break;
-
-        }
-
-    } else {
-        std::cout << ((int32_t)e.getButton()) << " button was released" << std::endl;
-    }
-
-}
-
-void onKeyboardEvent(const sdf::WindowKeyboardEvent& e) {
-
-    // If the key that triggered this event is pressed
-    if (e.isKeyPressed()) {
-
-        // Shift, Ctrl and Alt are commonly combined with other keys
-        // that is when these quality of life functions come in handy
-        if (e.isShiftPressed() && e.getKey() == sdf::Input::Key::F) {
-            std::cout << "Key combination! (Shift + F)" << std::endl;
-        }
-
-        std::cout << ((int32_t)e.getKey()) << " key was pressed" << std::endl;
-
-    }
-    else {
-        std::cout << ((int32_t)e.getKey()) << " key was released" << std::endl;
-    }
-
-}
-
-void onWindowEvent(const sdf::WindowEvent& e) {
-
-    // Dispatch events we want to handle,
-    // the dispatch method takes care of the event type checking
-
-    e.dispatch<sdf::WindowMoveEvent>(onWindowMove);
-    e.dispatch<sdf::WindowResizeEvent>(onWindowResize);
-
-    e.dispatch<sdf::WindowMouseMoveEvent>(onMouseMoveEvent);
-    e.dispatch<sdf::WindowMouseScrollEvent>(onMouseScrollEvent);
-    e.dispatch<sdf::WindowMouseButtonEvent>(onMouseButtonEvent);
-
-    e.dispatch<sdf::WindowKeyboardEvent>(onKeyboardEvent);
-
-    // Invokes the default behavior for certain events
-    e.defaultDispatch();
-
-}
+#pragma execution_character_set("utf-8")
 
 int main() {
 
-    // Create the window
-    sdf::Window window(L"Sandbox App", 800, 600);
+    SetConsoleOutputCP(65001);
 
-    // Use custom callback for event handling
-    window.setEventCallback(onWindowEvent);
+    std::cout << ">>> [ SDF EXAMPLES ] <<<\n" << std::endl;
+    std::cout << "> Made with SDF (https://github.com/Skulaurun/SDF)" << std::endl;
+    std::cout << "> Copyright (c) 2022 Adam Charvát" << std::endl;
+    std::cout << std::endl;
 
-    // Make the window visible
-    window.show();
+    std::cout << "[0]: Simple Window" << std::endl;
+    std::cout << "[1]: Window Events" << std::endl;
+    std::cout << "[2]: Graphics Rendering" << std::endl;
+    std::cout << "[3]: Socket Networking" << std::endl;
+    std::cout << std::endl;
 
-    // Loop until the window is closed
-    while (window.isOpen()) {
+    std::cout << "Type 'q' to exit." << std::endl;
+    std::cout << std::endl;
 
-        // Swap window buffers
-        window.display();
+    std::string line = "";
+    while (line != "q") {
 
-        // Process user input and call event callbacks
-        window.pollEvents();
+        int example = 0;
+        std::cout << "Run an example [0 - 3]: ";
+        std::getline(std::cin, line);
+
+        try {
+            example = std::stoi(line);
+        } catch (const std::exception&) { continue; }
+
+        try {
+
+            int exit = 0;
+            switch (example) {
+                case 0: exit = doExample00(); break;
+                case 1: exit = doExample01(); break;
+                case 2: exit = doExample02(); break;
+                case 3: exit = doExample03(); break;
+                default: continue;
+            }
+
+            std::cout << std::endl << "Example (#" << example << ") exited with code " << exit << "." << std::endl;
+
+        } catch (const std::exception& e) {
+            std::cout << std::endl << "An exception occurred while running an example (#" << example << "): " << e.what() << std::endl;
+        }
+
+        std::cout << std::endl;
 
     }
 

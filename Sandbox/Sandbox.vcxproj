@@ -167,7 +167,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Examples\01_WindowEvents.cpp" />
+    <ClCompile Include="src\Examples\02_GraphicsRendering.cpp" />
+    <ClCompile Include="src\Examples\00_SimpleWindow.cpp" />
+    <ClCompile Include="src\Examples\03_SocketNetworking.cpp" />
     <ClCompile Include="src\Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Examples\Examples.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\animation.png" />
+    <Image Include="res\font.png" />
+    <Image Include="res\sprite-sheet.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
