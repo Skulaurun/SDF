@@ -38,7 +38,7 @@ namespace sdf {
         static void init();
 
         static void clear(const Vec4f& color = Vec4f(0.0f));
-        static void clear(const Vec3f& color = Vec3f(0.0f));
+        static void clear(const Vec3f& color);
 
         static void drawQuad(const Mat4f& transform, const Vec4f& color);
         static void drawQuad(
