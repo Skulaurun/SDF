@@ -4,9 +4,9 @@
 [![release](https://img.shields.io/github/v/release/Skulaurun/SDF)](https://github.com/Skulaurun/SDF/releases/latest)
 [![license](https://img.shields.io/github/license/Skulaurun/SDF?color=blue)](https://github.com/Skulaurun/SDF/blob/main/LICENSE)
 
-A framework **dedicated** to operating system Windows, **simple** easy to use API. Including the abstraction of Windowing, OpenGL 3.0+ graphics and a bit of networking.
+A framework **dedicated** to operating system Windows, **simple** and easy to use API. Abstraction of windowing, OpenGL 3.0+ graphics and networking.
 
-I am 18 y/o (born 2003) developer, I made this framework as a graduation project (for "Maturita exam"). It was a great experience and I learned A LOT. I hope that someone, somewhere, someday might find this and create something nice with it.
+I am 18 y/o (born 2003) developer, and I made this framework as a graduation project (for "Maturita exam").
 
 ❗ Note that SDF is meant to be used as a static library, no dll support planned.
 
